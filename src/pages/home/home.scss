@@ -1,3 +1,28 @@
 page-home {
-
+    .left-clock {
+        margin-left: 20px;
+    }
+    .right-clock {
+        margin-right: 20px;
+    }
+    .clock-display {
+        font-size: 5.5em;
+        padding: 60px;
+        text-align: center;
+    }
+    .clock-setting {
+        width: 41%;
+    }
+    .timer-title {
+        text-align: center;
+    }
+    .instructions {
+        text-align: center;
+    }
+    .pause {
+        display: block;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

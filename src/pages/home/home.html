@@ -1,14 +1,44 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Warmahores Game Clock
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showSettings()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="reset()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div>
+    <!--Timers-->
+    <ion-grid>
+      <ion-row (click)="move()">
+        <ion-col col-6 class="well left-clock" [ngClass]="getTimerClass(timer1)">
+          <h1 class="clock-display">{{timer1.toString()}}</h1>
+        </ion-col>
+        <ion-col col-6 class="well right-clock" [ngClass]="getTimerClass(timer2)">
+          <h1 class="clock-display">{{timer2.toString()}}</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- <div class="row-fluid" (click)="move()">
+      <div>
+        <div class="well left-clock" [ngClass]="getTimerClass(timer1)">
+          <h1 class="clock-display">{{timer1.toString()}}</h1>
+        </div>
+      </div>
+      <div>
+        <div class="well right-clock" [ngClass]="getTimerClass(timer2)">
+          <h1 class="clock-display">{{timer2.toString()}}</h1>
+        </div>
+      </div>
+    </div> -->
+    <button ion-button large class="pause" (click)="togglePause()">{{actionLabel()}}</button>
+  </div>
 </ion-content>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 const BASE_TICK_TIME = 100; // .1 second
+declare var webserver: any;
+declare var networkinterface;
 
 @Component({
   selector: 'page-home',
@@ -40,6 +42,36 @@ export class HomePage {
     this.timer1.setFromPreset(this.setting1);
     this.timer2.setFromPreset(this.setting1);
   }
+
+startServer()
+{
+  webserver.onRequest(
+    function(request) {
+      console.log("O MA GAWD! This is the request: ", request);
+  
+      webserver.sendResponse(
+        request.requestId,
+        {
+          status: 200,
+          body: '<html>Hello World</html>',
+          headers: {
+            'Content-Type': 'text/html'
+          }
+        }
+      );
+    }
+  );
+  
+  webserver.start();
+
+  networkinterface.getWiFiIPAddress( function(ipInformation) {
+    console.log(ipInformation);
+  },
+function(error) {
+
+} );
+
+}
 
   showSettings() {
     this.togglePause(true);

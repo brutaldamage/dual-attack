@@ -31,4 +31,16 @@ page-home {
     .running { background: white; }
     .started .timer input         { opacity: 0.3; border: solid 4px transparent;}
     .started .timer.running input { opacity: 1.0; color: green; }
+
+    .stepper-container {
+      display: flex;
+    .stepper {
+      width: 30px;
+      height: 30px;
+    }
+    .stepper-label {
+      width: 50px;
+      text-align: center;
+    }
+  }
 }

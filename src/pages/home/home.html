@@ -4,9 +4,9 @@
       Warmahores Game Clock
     </ion-title>
     <ion-buttons end>
-        <button ion-button icon-only (click)="startServer()">
-            <ion-icon name="wifi"></ion-icon>
-          </button>
+      <button ion-button icon-only (click)="startServer()">
+        <ion-icon name="wifi"></ion-icon>
+      </button>
       <button ion-button icon-only (click)="showSettings()">
         <ion-icon name="settings"></ion-icon>
       </button>
@@ -23,15 +23,22 @@
     <ion-grid>
       <ion-row>
         <ion-col class="well left-clock timer">
-            <button ion-button large (click)="move()">{{timer1.toString()}}</button>
+          <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer1.toString()}}</button>
+          <button ion-button large (click)="start(0)" *ngIf="!gameStarted">START</button>
         </ion-col>
         <ion-col col-auto>
-            <div class="center">
-              <button ion-button color="secondary" class="pause" (click)="togglePause()" *ngIf="gameStarted">{{actionLabel()}}</button>
-            </div>
+          <div class="center">
+            <button ion-button color="secondary" class="pause" (click)="togglePause()" [disabled]="!gameStarted">{{actionLabel()}}</button>
+          </div>
+          <div class="stepper-container">
+              <button class="stepper" color="dark" ion-button small (click)="decrementTurn()">-</button>
+              <ion-label class="stepper-label">Turn {{turn}}</ion-label>
+              <button class="stepper" color="dark" ion-button small (click)="incrementTurn()">+</button>
+          </div>
         </ion-col>
         <ion-col class="well right-clock timer">
-            <button ion-button large (click)="move()" >{{timer2.toString()}}</button>
+          <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer2.toString()}}</button>
+          <button ion-button large (click)="start(1)" *ngIf="!gameStarted">START</button>
         </ion-col>
       </ion-row>
     </ion-grid>

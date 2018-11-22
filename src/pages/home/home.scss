@@ -1,28 +1,34 @@
 page-home {
-    .left-clock {
-        margin-left: 20px;
+    body { margin: 0; overflow: hidden; }
+    .timer  {
+    //   float: left;
+    //   width: 50%;
+      text-align: center;
+    //   background: #777;
+    //   height: 100%;
     }
-    .right-clock {
-        margin-right: 20px;
+    .timer button {
+      // margin: 47% 0 0;
+      font-size: 45px;
+      width: 275px;
     }
-    .clock-display {
-        font-size: 5.5em;
-        padding: 60px;
-        text-align: center;
+
+    .timer input {
+      margin: 47% 0 0;
+      font-size: 75px;
+      text-align: center;
+      width: 100%;
+      border: solid 4px black;
+      background: none;
+
+      // hide cursor
+      color: transparent;
+      text-shadow: 0 0 0 #2196f3;
+      &:focus {
+          outline: none;
+      }
     }
-    .clock-setting {
-        width: 41%;
-    }
-    .timer-title {
-        text-align: center;
-    }
-    .instructions {
-        text-align: center;
-    }
-    .pause {
-        display: block;
-        width: 100px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    .running { background: white; }
+    .started .timer input         { opacity: 0.3; border: solid 4px transparent;}
+    .started .timer.running input { opacity: 1.0; color: green; }
 }

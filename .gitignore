@@ -63,3 +63,5 @@ capacitor-ios/
 local.properties
 contents.xcworkspacedata
 .stencil/
+/package-lock.json
+/typings

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
+import { Plugins } from '@capacitor/core';
+import { NetworkInterface } from '@ionic-native/network-interface';
+const { Modals } = Plugins;
 
 const BASE_TICK_TIME = 100; // .1 second
 declare var webserver: any;
@@ -13,13 +16,18 @@ export class HomePage {
 
   private nextToMove: Timer;
 
-  setting1: TimerPreset;
-  setting2: TimerPreset;
+  public setting1: TimerPreset;
+  public setting2: TimerPreset;
 
-  timer1: Timer;
-  timer2: Timer;
+  public timer1: Timer;
+  public timer2: Timer;
 
-  constructor(public navCtrl: NavController) {
+  private _gameStarted;
+  get gameStarted(): boolean {
+    return this._gameStarted;
+  }
+
+  constructor(public navCtrl: NavController, private platform: Platform, private network: NetworkInterface) {
     this.setting1 = new TimerPreset({
       name: "75 Points",
       minutes: 60,
@@ -43,50 +51,66 @@ export class HomePage {
     this.timer2.setFromPreset(this.setting1);
   }
 
-startServer()
-{
-  webserver.onRequest(
-    function(request) {
-      console.log("O MA GAWD! This is the request: ", request);
-  
-      webserver.sendResponse(
-        request.requestId,
-        {
-          status: 200,
-          body: '<html>Hello World</html>',
-          headers: {
-            'Content-Type': 'text/html'
-          }
+  async startServer() {
+
+    let ipAddress: string = "localhost";
+
+    // webserver is only available on cordova
+    if (this.platform.is('cordova')) {
+      webserver.onRequest((request) => {
+        console.log("O MA GAWD! This is the request: ", request);
+
+        var json = {
+          timer1: this.timer1,
+          timer2: this.timer2
         }
+
+        webserver.sendResponse(
+          request.requestId,
+          {
+            status: 200,
+            body: JSON.stringify(json),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+      }
       );
+
+      webserver.start();
+      var networkinfo = await this.network.getWiFiIPAddress();
+      ipAddress = networkinfo.ip;
     }
-  );
-  
-  webserver.start();
 
-  networkinterface.getWiFiIPAddress( function(ipInformation) {
-    console.log(ipInformation);
-  },
-function(error) {
-
-} );
-
-}
+    Modals.alert({
+      title: "Server Info",
+      message: `http://${ipAddress}:8080`
+    });
+  }
 
   showSettings() {
-    this.togglePause(true);
+    // this.togglePause(true);
     // todo: show modal
   }
 
-  reset() {
-    this.timer1.stop(false);
-    this.timer2.stop(false);
-    this.timer1.isOutOfTime = false;
-    this.timer2.isOutOfTime = false;
-    this.updateClockSettings();
-    this.nextToMove = this.timer1;
+  async reset() {
+    var confirmResult = await Modals.confirm({
+      title: "Reset Game",
+      message: "Are you sure you want to reset this game?",
+      okButtonTitle: "Yes",
+      cancelButtonTitle: "No"
+    });
 
-    //todo: close modal
+    if (confirmResult.value) {
+      this._gameStarted = false;
+      this.timer1.stop(false);
+      this.timer2.stop(false);
+      this.timer1.isOutOfTime = false;
+      this.timer2.isOutOfTime = false;
+      this.updateClockSettings();
+      this.nextToMove = this.timer1;
+    }
   }
 
   togglePause(isForcedStop: boolean) {
@@ -113,23 +137,11 @@ function(error) {
     if (this.timer1.isOutOfTime || this.timer2.isOutOfTime) {
       return "Reset";
     }
-    return "Start";
+    return "Resume";
   };
 
-  getTimerClass(timer: Timer): string {
-    if (timer.isOutOfTime) {
-      return "alert-danger";
-    }
-    if (timer.isTicking) {
-      return "alert-info";
-    }
-    if (this.nextToMove === timer) {
-      return "alert-info";
-    }
-    return "";
-  }
-
   move() {
+    this._gameStarted = true;
     if (this.timer1.isTicking) {
       this.timer1.stop(true);
       this.timer2.start();

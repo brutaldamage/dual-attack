@@ -1,0 +1,6 @@
+{
+  "appId": "org.brutaldamage.clock",
+  "appName": "game-clock",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

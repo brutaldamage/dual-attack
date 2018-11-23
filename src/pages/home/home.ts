@@ -1,14 +1,25 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
-import { Plugins } from '@capacitor/core';
+import { Plugins, CallbackID } from '@capacitor/core';
 import { NetworkInterface } from '@ionic-native/network-interface';
 import { Timer } from '../../_logic/Timer';
 import { TimerPreset } from '../../_logic/TimerPreset';
+import { Observable } from 'rxjs/Observable';
 const { Modals } = Plugins;
 
+declare global {
+  interface PluginRegistry {
+    WebServerPlugin?: WebServerPlugin;
+  }
+}
 
-declare var webserver: any;
-declare var networkinterface;
+export type WebServerOnRequesthCallback = (data: any, err?: any) => void;
+
+interface WebServerPlugin {
+  startServer(): Promise<any>;
+  onRequest(callback: WebServerOnRequesthCallback): CallbackID;
+  sendResponse(response: any);
+}
 
 @Component({
   selector: 'page-home',
@@ -78,44 +89,21 @@ export class HomePage {
   }
 
   async startServer() {
+    const { WebServerPlugin } = Plugins;
 
-    let ipAddress: string = "localhost";
+    await WebServerPlugin.startServer();
 
-    // webserver is only available on cordova
-    if (this.platform.is('cordova')) {
-      webserver.onRequest((request) => {
+    WebServerPlugin.onRequest((data: any) => {
+      console.log('onNext: %s', data);
 
-        var json = {
-          timer1: this.timer1,
-          timer2: this.timer2,
-          score : {
-            cp1: this._cp1,
-            cp2: this._cp2,
-            turn: this.turn
-          }
+      WebServerPlugin.sendResponse({
+        requestId: data.requestId,
+        status: 200,
+        body: '<html>Hello World</html>',
+        headers: {
+          'Content-Type': 'text/html'
         }
-
-        webserver.sendResponse(
-          request.requestId,
-          {
-            status: 200,
-            body: JSON.stringify(json),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-        );
-      }
-      );
-
-      webserver.start();
-      var networkinfo = await this.network.getWiFiIPAddress();
-      ipAddress = networkinfo.ip;
-    }
-
-    Modals.alert({
-      title: "Server Info",
-      message: `http://${ipAddress}:8080`
+      });
     });
   }
 
@@ -141,6 +129,8 @@ export class HomePage {
       this.updateClockSettings();
       this.nextToMove = this.timer1;
       this._turnCounter = 1;
+      this._cp1 = 0;
+      this._cp2 = 0;
     }
   }
 
@@ -216,7 +206,7 @@ export class HomePage {
   }
 
   decrementCP(playerIndex: number) {
-    if (playerIndex == 0 && this._cp1 > 0) 
+    if (playerIndex == 0 && this._cp1 > 0)
       this._cp1--;
     else if (playerIndex == 1 && this._cp2 > 0)
       this._cp2--;

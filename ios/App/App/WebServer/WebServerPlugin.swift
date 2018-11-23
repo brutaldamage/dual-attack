@@ -7,7 +7,8 @@
 
 import Foundation
 import Capacitor
-
+import GCDWebServer
+    
 @objc(WebServerPlugin)
 public class WebServerPlugin: CAPPlugin {
     
@@ -77,6 +78,15 @@ public class WebServerPlugin: CAPPlugin {
     }
     
     func initHTTPRequestHandlers() {
+        
+//        self.webServer.addHandler(
+//            match: {
+//            (requestMethod, requestURL, requestHeaders, urlPath, urlQuery) -> GCDWebServerRequest? in
+//            return GCDWebServerDataRequest(method: requestMethod, url: requestURL, headers: requestHeaders, path: urlPath, query: urlQuery)
+//        }) { (<#GCDWebServerRequest?#>, <#GCDWebServerCompletionBlock?#>) in
+//            <#code#>
+//        }
+        
         self.webServer.addHandler(
             match: {
                 (requestMethod, requestURL, requestHeaders, urlPath, urlQuery) -> GCDWebServerRequest? in
@@ -86,12 +96,21 @@ public class WebServerPlugin: CAPPlugin {
         )
     }
     
-    func processRequest(request: GCDWebServerRequest, completionBlock: GCDWebServerCompletionBlock) {
+    func processRequest(request: GCDWebServerRequest?, completionBlock: GCDWebServerCompletionBlock?) {
+        
+        if(request == nil) {
+            if(completionBlock != nil) {
+                let block =  completionBlock as! GCDWebServerCompletionBlock
+                block(nil)
+            }
+            return;
+        }
+        
         var timeout = 0
         // Fetch data as GCDWebserverDataRequest
         let requestUUID = UUID().uuidString
         // Transform it into an dictionary for the javascript plugin
-        let requestDict = self.requestToRequestDict(requestUUID: requestUUID, request: request)
+        let requestDict = self.requestToRequestDict(requestUUID: requestUUID, request: request as! GCDWebServerRequest)
         
         // Do a call to the onRequestCommand to inform the JS plugin
         if (self.onRequestCommand != nil) {
@@ -118,7 +137,8 @@ public class WebServerPlugin: CAPPlugin {
         self.responses.removeValue(forKey: requestUUID)
         
         // Complete the async response
-        completionBlock(response!)
+        let block =  completionBlock as! GCDWebServerCompletionBlock
+        block   (response!)
     }
     
     func requestToRequestDict(requestUUID: String, request: GCDWebServerRequest) -> Dictionary<String, Any> {

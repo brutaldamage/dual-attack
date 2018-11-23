@@ -5,9 +5,4 @@
     <param name="ios-package" value="CDVNetworkInterface" onload="true"/>
   </feature>
 
-
-  <feature name="Webserver">
-    <param name="ios-package" value="Webserver"/>
-  </feature>
-
   </widget>

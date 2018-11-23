@@ -58,7 +58,7 @@ export class MyApp {
         status: 200,
         body: this.getPageHtml(),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'text/html'
         },
       });
     }
@@ -69,30 +69,7 @@ export class MyApp {
     <!DOCTYPE html>
     <html>
       <head>
-          <script>
-          var hostname = window.location.hostname;
-          function keepAlive() {
-              var timeout = 500;
-
-              $.getJSON(
-                  "http://" + hostname + ":8080/data",
-                  function (json) {
-                      console.log(json);
-
-                      document.getElementById("turn").innerText = json["score"]["turn"];
-
-                      document.getElementById("leftPlayerTime").innerText = json["timer1"];
-                      document.getElementById("rightPlayerTime").innerText = json["timer2"];
-
-                      document.getElementById("leftPlayerCP").innerText = json["score"]["cp1"];
-                      document.getElementById("rightPlayerCP").innerText = json["score"]["cp2"];
-                  }
-              );
-
-              timerId = setTimeout(keepAlive, timeout);
-          };
-          keepAlive();
-          </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       </head>
       <body>
           <div id="turnInfo">
@@ -124,7 +101,30 @@ export class MyApp {
               </p>
           </div>
       </body>
-      <script type="text/javascript" src="/files/logic.js"></script>
+      <script>
+      var hostname = window.location.hostname;
+          function keepAlive() {
+              var timeout = 500;
+
+              $.getJSON(
+                  "http://" + hostname + ":8080/data",
+                  function (json) {
+                      console.log(json);
+
+                      document.getElementById("turn").innerText = json["score"]["turn"];
+
+                      document.getElementById("leftPlayerTime").innerText = json["timer1"];
+                      document.getElementById("rightPlayerTime").innerText = json["timer2"];
+
+                      document.getElementById("leftPlayerCP").innerText = json["score"]["cp1"];
+                      document.getElementById("rightPlayerCP").innerText = json["score"]["cp2"];
+                  }
+              );
+
+              timerId = setTimeout(keepAlive, timeout);
+          };
+          keepAlive();
+      </script>
     </html>
     `;
 

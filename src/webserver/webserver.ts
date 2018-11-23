@@ -8,6 +8,10 @@ declare global {
 
 export type WebServerOnRequestCallback = (data: WebServerRequest, err?: any) => void;
 
+export interface WebServerUrl {
+    url: string;
+}
+
 export interface WebServerRequest {
     requestId: string;
     body : string;
@@ -25,6 +29,7 @@ export interface WebServerResponse {
 }
 
 export interface WebServerPlugin {
+    getURL(): Promise<WebServerUrl>;
     startServer(): Promise<any>;
     onRequest(callback: WebServerOnRequestCallback): CallbackID;
     sendResponse(response: WebServerResponse);

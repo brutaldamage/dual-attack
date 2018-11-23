@@ -26,6 +26,16 @@ public class WebServerPlugin: CAPPlugin {
         self.initHTTPRequestHandlers()
     }
     
+    @objc func getURL(_ call: CAPPluginCall) {
+        if(self.webServer.isRunning) {
+            let url = self.webServer.serverURL
+            call.success([ "url" : url?.absoluteString ])
+        }
+        else {
+            call.error("Server is not running")
+        }
+    }
+    
     @objc func startServer(_ call: CAPPluginCall) {
         
         var port = 8080

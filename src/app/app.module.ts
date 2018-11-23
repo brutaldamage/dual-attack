@@ -7,6 +7,7 @@ import { NetworkInterface } from '@ionic-native/network-interface';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { GameStateProvider } from '../providers/game-state/game-state';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    NetworkInterface
+    NetworkInterface,
+    GameStateProvider
   ]
 })
 export class AppModule {}

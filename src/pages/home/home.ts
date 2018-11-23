@@ -17,6 +17,9 @@ declare var networkinterface;
 export class HomePage {
 
   private _turnCounter: number = 1;
+  private _cp1: number = 0;
+  private _cp2: number = 0;
+
   private nextToMove: Timer;
 
   public setting1: TimerPreset;
@@ -31,15 +34,23 @@ export class HomePage {
   }
 
   get turn(): string {
-      var temp = this._turnCounter / 2;
-      var isBTurn = Number.isInteger(temp);
+    var temp = this._turnCounter / 2;
+    var isBTurn = Number.isInteger(temp);
 
-      var whole = Math.ceil(temp);
+    var whole = Math.ceil(temp);
 
-      if(whole < 1)
-        return "1A";
+    if (whole < 1)
+      return "1A";
 
-      return `${whole}${isBTurn ? "B" : "A"}`;
+    return `${whole}${isBTurn ? "B" : "A"}`;
+  }
+
+  get cp1(): number {
+    return this._cp1;
+  }
+
+  get cp2(): number {
+    return this._cp2;
   }
 
   constructor(public navCtrl: NavController, private platform: Platform, private network: NetworkInterface) {
@@ -73,11 +84,15 @@ export class HomePage {
     // webserver is only available on cordova
     if (this.platform.is('cordova')) {
       webserver.onRequest((request) => {
-        console.log("O MA GAWD! This is the request: ", request);
 
         var json = {
           timer1: this.timer1,
-          timer2: this.timer2
+          timer2: this.timer2,
+          score : {
+            cp1: this._cp1,
+            cp2: this._cp2,
+            turn: this.turn
+          }
         }
 
         webserver.sendResponse(
@@ -175,13 +190,13 @@ export class HomePage {
     }
   }
 
-  start(timerIndex: number){
-    if(timerIndex == 0)
+  start(timerIndex: number) {
+    if (timerIndex == 0)
       this.nextToMove = this.timer1;
-      else if(timerIndex == 1)
+    else if (timerIndex == 1)
       this.nextToMove = this.timer2;
 
-      this.move();
+    this.move();
   }
 
   incrementTurn() {
@@ -189,7 +204,21 @@ export class HomePage {
   }
 
   decrementTurn() {
-    if(this._turnCounter > 1)
-        this._turnCounter--;
+    if (this._turnCounter > 1)
+      this._turnCounter--;
+  }
+
+  incrementCP(playerIndex: number) {
+    if (playerIndex == 0)
+      this._cp1++;
+    else if (playerIndex == 1)
+      this._cp2++;
+  }
+
+  decrementCP(playerIndex: number) {
+    if (playerIndex == 0 && this._cp1 > 0) 
+      this._cp1--;
+    else if (playerIndex == 1 && this._cp2 > 0)
+      this._cp2--;
   }
 }

@@ -17,7 +17,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div>
     <!--Timers-->
     <ion-grid>
@@ -25,20 +25,30 @@
         <ion-col class="well left-clock timer">
           <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer1.toString()}}</button>
           <button ion-button large (click)="start(0)" *ngIf="!gameStarted">START</button>
+          <div class="stepper-container">
+              <button class="stepper" color="dark" ion-button small (click)="decrementCP(0)" [disabled]="!gameStarted">-</button>
+              <ion-label class="stepper-label">CP {{cp1}}</ion-label>
+              <button class="stepper" color="dark" ion-button small (click)="incrementCP(0)" [disabled]="!gameStarted">+</button>
+          </div>
         </ion-col>
         <ion-col col-auto>
           <div class="center">
             <button ion-button color="secondary" class="pause" (click)="togglePause()" [disabled]="!gameStarted">{{actionLabel()}}</button>
           </div>
           <div class="stepper-container">
-              <button class="stepper" color="dark" ion-button small (click)="decrementTurn()">-</button>
+              <button class="stepper" color="dark" ion-button small (click)="decrementTurn()" [disabled]="!gameStarted">-</button>
               <ion-label class="stepper-label">Turn {{turn}}</ion-label>
-              <button class="stepper" color="dark" ion-button small (click)="incrementTurn()">+</button>
+              <button class="stepper" color="dark" ion-button small (click)="incrementTurn()" [disabled]="!gameStarted">+</button>
           </div>
         </ion-col>
         <ion-col class="well right-clock timer">
           <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer2.toString()}}</button>
           <button ion-button large (click)="start(1)" *ngIf="!gameStarted">START</button>
+          <div class="stepper-container">
+              <button class="stepper" color="dark" ion-button small (click)="decrementCP(1)" [disabled]="!gameStarted">-</button>
+              <ion-label class="stepper-label">CP {{cp2}}</ion-label>
+              <button class="stepper" color="dark" ion-button small (click)="incrementCP(1)" [disabled]="!gameStarted">+</button>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

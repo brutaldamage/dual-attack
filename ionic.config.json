@@ -1,6 +1,7 @@
 {
   "name": "ionic-clock",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }

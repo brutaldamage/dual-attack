@@ -4,22 +4,8 @@ import { Plugins, CallbackID } from '@capacitor/core';
 import { NetworkInterface } from '@ionic-native/network-interface';
 import { Timer } from '../../_logic/Timer';
 import { TimerPreset } from '../../_logic/TimerPreset';
-import { Observable } from 'rxjs/Observable';
-const { Modals } = Plugins;
-
-declare global {
-  interface PluginRegistry {
-    WebServerPlugin?: WebServerPlugin;
-  }
-}
-
-export type WebServerOnRequesthCallback = (data: any, err?: any) => void;
-
-interface WebServerPlugin {
-  startServer(): Promise<any>;
-  onRequest(callback: WebServerOnRequesthCallback): CallbackID;
-  sendResponse(response: any);
-}
+import { WebServerPlugin, WebServerRequest } from '../../webserver/webserver';
+const { Modals, WebServerPlugin } = Plugins;
 
 @Component({
   selector: 'page-home',
@@ -89,21 +75,39 @@ export class HomePage {
   }
 
   async startServer() {
-    const { WebServerPlugin } = Plugins;
-
     await WebServerPlugin.startServer();
 
-    WebServerPlugin.onRequest((data: any) => {
-      console.log('onNext: %s', data);
+    WebServerPlugin.onRequest((data: WebServerRequest) => {
 
-      WebServerPlugin.sendResponse({
-        requestId: data.requestId,
-        status: 200,
-        body: '<html>Hello World</html>',
-        headers: {
-          'Content-Type': 'text/html'
-        }
-      });
+      if (data.path.includes("data")) {
+        var json = {
+          timer1: this.timer1.toString(),
+          timer2: this.timer2.toString(),
+          score: {
+            cp1: this._cp1,
+            cp2: this._cp2,
+            turn: this.turn
+          }
+        };
+
+        WebServerPlugin.sendResponse({
+          requestId: data.requestId,
+          status: 200,
+          body: JSON.stringify(json),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
+      else 
+      {
+        WebServerPlugin.sendResponse({
+          requestId: data.requestId,
+          body: "",
+          headers: {},
+          status: 404
+        });
+      }
     });
   }
 

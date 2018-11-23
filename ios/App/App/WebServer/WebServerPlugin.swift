@@ -48,16 +48,15 @@ public class WebServerPlugin: CAPPlugin {
     
     @objc func onRequest(_ call: CAPPluginCall) {
         self.onRequestCommand = call
-//        call.save()
-
+        call.save()
     }
     
     @objc func sendResponse(_ call: CAPPluginCall) {
 
         let requestId = call.getString("requestId") as! String;
         
-        let body = call.getString("body") as! String;
-        let status = call.getInt("status") as! Int;
+        let body = call.getString("body");
+        let status = call.getInt("status");
         let headers = call.getObject("headers", defaultValue: Dictionary<String, String>())
         
         self.responses[requestId] = [
@@ -65,8 +64,6 @@ public class WebServerPlugin: CAPPlugin {
             "body" : body,
             "headers" : headers
         ];
-//        call.argment
-//        self.responses[command.argument(at: 0) as! String] = command.argument(at: 1)
     }
     
     func initHTTPRequestHandlers() {
@@ -90,13 +87,6 @@ public class WebServerPlugin: CAPPlugin {
         if (self.onRequestCommand != nil) {
             
             self.onRequestCommand?.success(requestDict)
-            
-//            let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: requestDict)
-//            pluginResult?.setKeepCallbackAs(true)
-//            self.commandDelegate.send(
-//                pluginResult,
-//                callbackId: self.onRequestCommand?.callbackId
-//            )
         }
         
         // Here we have to wait until the javascript block fetches the message and do a response

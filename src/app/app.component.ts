@@ -4,8 +4,7 @@ import { Plugins } from '@capacitor/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GameStateProvider } from '../providers/game-state/game-state';
-import { WebServerPlugin, WebServerRequest } from '../webserver/webserver';
-const { WebServerPlugin } = Plugins;
+import { TinyServerPlugin, TinyServerRequest } from 'TinyServer/dist/esm/index'
 
 import { HomePage } from '../pages/home/home';
 @Component({
@@ -25,13 +24,13 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      WebServerPlugin.startServer().then(() => {
-        WebServerPlugin.onRequest((data: WebServerRequest) => this.handleOnRequest(data));
+      TinyServerPlugin.startServer().then(() => {
+        TinyServerPlugin.onRequest((data: TinyServerRequest) => this.handleOnRequest(data));
       });
     });
   }
 
-  private handleOnRequest(data: WebServerRequest) {
+  private handleOnRequest(data: TinyServerRequest) {
     if (data.path.includes("data")) {
       var json = {
         timer1: this._gameState.timer1.toString(),
@@ -43,7 +42,7 @@ export class MyApp {
         }
       };
 
-      WebServerPlugin.sendResponse({
+      TinyServerPlugin.sendResponse({
         requestId: data.requestId,
         status: 200,
         body: JSON.stringify(json),
@@ -53,7 +52,7 @@ export class MyApp {
       });
     }
     else {
-      WebServerPlugin.sendResponse({
+      TinyServerPlugin.sendResponse({
         requestId: data.requestId,
         status: 200,
         body: this.getPageHtml(),

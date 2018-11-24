@@ -30,16 +30,20 @@ export class GameStateProvider {
     return `${whole}${isBTurn ? "B" : "A"}`;
   }
 
-    get cp1(): number {
-      return this._cp1;
-    }
+  get cp1(): number {
+    return this._cp1;
+  }
 
-    get cp2(): number {
-      return this._cp2;
-    }
+  get cp2(): number {
+    return this._cp2;
+  }
 
-  public setting1: TimerPreset;
-  public setting2: TimerPreset;
+  private _currentGameSetting: number = 3;
+  get currentGameSetting(): number {
+    return this._currentGameSetting;
+  }
+
+  private gameSettings: TimerPreset[];
 
   public timer1: Timer;
   public timer2: Timer;
@@ -50,41 +54,74 @@ export class GameStateProvider {
   }
 
   constructor() {
-    this.setting1 = new TimerPreset({
-      name: "75 Points",
-      minutes: 60,
-      seconds: 0,
-      increment: 1
-    });
-    this.setting2 = new TimerPreset({
-      name: "35 Points",
-      minutes: 45,
-      seconds: 0,
-      increment: 1
-    });
 
-    this.timer1 = new Timer("75 Points", this.setting1);
-    this.timer2 = new Timer("75 Points", this.setting1);
+    this.gameSettings = [
+      new TimerPreset({
+        name: "20 minutes",
+        minutes: 20,
+        seconds: 0,
+        increment: 1
+      }),
+      new TimerPreset({
+        name: "30 minutes",
+        minutes: 30,
+        seconds: 0,
+        increment: 1
+      }),
+      new TimerPreset({
+        name: "40 minutes",
+        minutes: 43,
+        seconds: 0,
+        increment: 1
+      }),
+      new TimerPreset({
+        name: "60 minutes",
+        minutes: 60,
+        seconds: 0,
+        increment: 1
+      }),
+      new TimerPreset({
+        name: "75 minutes",
+        minutes: 75,
+        seconds: 0,
+        increment: 1
+      }),
+      new TimerPreset({
+        name: "120 minutes",
+        minutes: 120,
+        seconds: 0,
+        increment: 1
+      }),
+      new TimerPreset({
+        name: "150 minutes",
+        minutes: 150,
+        seconds: 0,
+        increment: 1
+      })
+    ];
+
+    this.timer1 = new Timer("Timer 1", this.gameSettings[3]);
+    this.timer2 = new Timer("Timer 2", this.gameSettings[3]);
     this.nextToMove = this.timer1;
   }
 
-  updateClockSettings() {
-    this.timer1.setFromPreset(this.setting1);
-    this.timer2.setFromPreset(this.setting1);
+  updateClockSettings(settingsIndex: number) {
+    this._currentGameSetting = settingsIndex;
+    this.timer1.setFromPreset(this.gameSettings[settingsIndex]);
+    this.timer2.setFromPreset(this.gameSettings[settingsIndex]);
   }
 
-  async resetGameState()
-  {
+  async resetGameState() {
     this._gameStarted = false;
-      this.timer1.stop(false);
-      this.timer2.stop(false);
-      this.timer1.isOutOfTime = false;
-      this.timer2.isOutOfTime = false;
-      this.updateClockSettings();
-      this.nextToMove = this.timer1;
-      this._turnCounter = 1;
-      this._cp1 = 0;
-      this._cp2 = 0;
+    this.timer1.stop(false);
+    this.timer2.stop(false);
+    this.timer1.isOutOfTime = false;
+    this.timer2.isOutOfTime = false;
+    this.updateClockSettings(this.currentGameSetting);
+    this.nextToMove = this.timer1;
+    this._turnCounter = 1;
+    this._cp1 = 0;
+    this._cp2 = 0;
   }
 
   togglePause(isForcedStop: boolean) {

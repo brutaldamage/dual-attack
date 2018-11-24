@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, ModalController, Platform } from 'ionic-angular';
 import { Plugins, CallbackID } from '@capacitor/core';
-import { NetworkInterface } from '@ionic-native/network-interface';
 import { Timer } from '../../_logic/Timer';
 import { TimerPreset } from '../../_logic/TimerPreset';
+import { TinyServerPlugin } from 'TinyServer/dist/esm/index';
 
 import { GameStateProvider } from '../../providers/game-state/game-state';
-const { Modals, WebServerPlugin } = Plugins;
+import { SettingsPage } from '../settings/settings';
+const { Modals } = Plugins;
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  get serverSettingsAvailable(): Boolean {
+    return this.platform.is('cordova');
+  }
+
+  get turn(): string {
+    return this.gameState.turn;
+  }
 
   get timer1(): Timer {
     return this.gameState.timer1;
@@ -34,17 +43,12 @@ export class HomePage {
     return this.gameState.cp2;
   }
 
-  constructor(public navCtrl: NavController, private platform: Platform, private network: NetworkInterface, private gameState: GameStateProvider) {
-   
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private platform: Platform, private gameState: GameStateProvider) {
+
   }
 
-  updateClockSettings() {
-    this.gameState.updateClockSettings();
-  }
-
-  async startServer() {
-
-    var url = await WebServerPlugin.getURL();
+  async showServerSettings() {
+    var url = await TinyServerPlugin.getURL();
     console.log(url);
 
     await Modals.alert({
@@ -54,8 +58,8 @@ export class HomePage {
   }
 
   showSettings() {
-    // this.togglePause(true);
-    // todo: show modal
+    let profileModal = this.modalCtrl.create(SettingsPage);
+    profileModal.present();
   }
 
   async reset() {

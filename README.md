@@ -17,12 +17,12 @@ Our meta has a few developers in it, but we all of slightly different skill sets
 
 The UI is pretty simple, its a single UI with some configurable options (mostly just time on the clock). It includes some presets for default times for the standard tournament game sizes.
 
-### via the native mobile apps
+#### via the native mobile apps
 If you run the android or iOS app, when it starts, the app will create an interal web server. This web server can be accessed from any device on the same network as the phone/tabelt running the app. Clicking the "internet" button in the top right nav bar will display the IP address the server can be accessed from.
 
 If you launch that url in a web browser you'll get a web page that displays the information hit the root of that url. That web page will display the game stats from the mobile app in realtime. How cool is that!?! This allows the game stats to easily be displayed on an external device, such as a TV. For us, we open the url in [OBS](https://obsproject.com/) and put some custom CSS over the top of it so it can be displayed on our streams and recordings.
 
-**on the web**
+#### via the web
 We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
 
 ## Known Issues

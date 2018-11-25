@@ -84,5 +84,5 @@ The web app is hosted on netlify.com currently. That gives us free hosting for s
 
 
 ## Contributors
-* Drew Frisk: [keannan5390](https://github..com/keannan5390)
+* Drew Frisk: [keannan5390](https://github.com/keannan5390)
 * Lance Aeby: [lanceaeby](https://github.com/lanceaeby)

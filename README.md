@@ -1,33 +1,32 @@
 # Dual Attack
 
-an attempt at rebuilding our game clock using ionic & capacitor.
+Dual Attack is a web and mobile application built with [Ionic Capactior](https://capacitor.ionicframework.com/) that can be used to manage the death clock, turn counter and control point tracking during a Warmachine or Hordes game.
 
 The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.
 
-The app is currently functional on web and iOS. Android is in the works (everything works except the web server). It is built using the [ionic capcitor framework](https://capacitor.ionicframework.com/). 
+The app is currently functional on web and iOS. Android is in the works (everything works except the web server).
 
-## what is it?
-We ([Brutal Damage](https://brutaldamage.blog)) wanted a way to display live updates of clock, turn, and CP info for our Warmahordes Youtube streams. We couldn't find anything that did the job, so we built one ourselves.
+## What Is It?
+We ([Brutal Damage](https://brutaldamage.blog)) wanted a way to display live updates of clock, turn, and CP info for our Warmachine & Hordes Youtube streams. We had trouble finding something that did what we wanted, so we decided to build what we couldn't find.
 
-The first version was a frankenstein hack of a few projects on github to make something that worked. ([See it over here](https://github.com/brutaldamage/game-clock))
+The first version was a frankenstein hack of a few projects found around github. We used that to figure out what we needed and how we wanted things to work. If your curious about the first prototype, go check it out ([over here](https://github.com/brutaldamage/game-clock)).
 
-Once we proved out a solution for an easily portable app to display game info on a remote device/screen, we decided we wanted something that was easier to develop (not hacked together) and use a more current tech-stack. Since we have a variety of developer skill sets in our meta, we decided to go with a web stack for the core logic of the app, and use capacitor to get it working as a native app on mobile devices (and eventually electron).
+Our meta has a few developers in it, but we all of slightly different skill sets when it comes to tech-stacks of choice. We chose Ionic Capacitor because it gives us the best of both worlds -- friendly web tech, and native mobile applications. This also gives us the ability to easily make a desktop app in the future if we want.
 
-So thats what this repo is.
-
-## how does it work?
+## How Does It Work?
 
 The UI is pretty simple, its a single UI with some configurable options (mostly just time on the clock). It includes some presets for default times for the standard tournament game sizes.
 
-### on the web
+### via the native mobile apps
+If you run the android or iOS app, when it starts, the app will create an interal web server. This web server can be accessed from any device on the same network as the phone/tabelt running the app. Clicking the "internet" button in the top right nav bar will display the IP address the server can be accessed from.
 
-### via the native app
-If you run the android or iOS app, when it starts, the app will create an interal web server. This web server can be accessed from any device on the same network as the phone/tabelt running the app. Clicking the "internet" button in the top right will display the IP address the server can be accessed from.
+If you launch that url in a web browser you'll get a web page that displays the information hit the root of that url. That web page will display the game stats from the mobile app in realtime. How cool is that!?! This allows the game stats to easily be displayed on an external device, such as a TV. For us, we open the url in [OBS](https://obsproject.com/) and put some custom CSS over the top of it so it can be displayed on our streams and recordings.
 
-If you hit the root of that url, you'll get a web page. That web page will display the same game info that is on the mobile app. How cool is that!?! From there, you can use that webpage to display the game info wherever you want. Display it as is on a tv, do some custom CSS to put the overlay in OBS (or something similar). The options are pretty limitless!
+**on the web**
+We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
 
-## known issues
-The webserver currently only works on iOS. The webserver code is implemented natively for android & iOS, and we still need to write the implemention for Android.
+## Known Issues
+The webserver currently only works on iOS. Since this project is still a work in progress, we need to get the webserver implemented in the Android app. 
 
 ## want to contribute? 
 
@@ -81,6 +80,9 @@ Coming soon. There isn't a build pipeline or anything setup yet. So using the ap
 
 ### web
 
-The web app is published using github pages in the `gh-pages` branch of this repository. The `www` folder needs to be published to the root of the `gh-pages` branch.
+The web app is hosted on netlify.com currently. That gives us free hosting for static content (which this is) and gives us a really simple build pipeline. Netlify is hooked up to the master branch of the repository. Push some commits to master, and the changes should show up over at [https://dual-attack.app](https://dual-attack.app) in a few minutes.
 
-`git subtree push --prefix www origin gh-pages`
+
+## Contributors
+* Drew Frisk: [keannan5390](https://github..com/keannan5390)
+* Lance Aeby: [lanceaeby](https://github.com/lanceaeby)

@@ -4,7 +4,8 @@ import { Plugins } from '@capacitor/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GameStateProvider } from '../providers/game-state/game-state';
-import { TinyServerPlugin, TinyServerRequest } from 'TinyServer/dist/esm/index'
+import { WebServerPlugin, WebServerRequest } from '../native/webserver';
+const { WebServerPlugin } = Plugins
 
 import { HomePage } from '../pages/home/home';
 @Component({
@@ -24,13 +25,15 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      TinyServerPlugin.startServer().then(() => {
-        TinyServerPlugin.onRequest((data: TinyServerRequest) => this.handleOnRequest(data));
-      });
+      if (platform.is('cordova')) {
+        WebServerPlugin.startServer().then(() => {
+          WebServerPlugin.onRequest((data: WebServerRequest) => this.handleOnRequest(data));
+        });
+      }
     });
   }
 
-  private handleOnRequest(data: TinyServerRequest) {
+  private handleOnRequest(data: WebServerRequest) {
     if (data.path.includes("data")) {
       var json = {
         timer1: this._gameState.timer1.toString(),
@@ -42,7 +45,7 @@ export class MyApp {
         }
       };
 
-      TinyServerPlugin.sendResponse({
+      WebServerPlugin.sendResponse({
         requestId: data.requestId,
         status: 200,
         body: JSON.stringify(json),
@@ -52,7 +55,7 @@ export class MyApp {
       });
     }
     else {
-      TinyServerPlugin.sendResponse({
+      WebServerPlugin.sendResponse({
         requestId: data.requestId,
         status: 200,
         body: this.getPageHtml(),
@@ -63,7 +66,7 @@ export class MyApp {
     }
   }
 
-  private getPageHtml() : string {
+  private getPageHtml(): string {
     return `
     <!DOCTYPE html>
     <html>

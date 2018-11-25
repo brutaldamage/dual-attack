@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, Platform } from 'ionic-angular';
 import { Plugins, CallbackID } from '@capacitor/core';
 import { Timer } from '../../_logic/Timer';
-import { TimerPreset } from '../../_logic/TimerPreset';
-import { TinyServerPlugin } from 'TinyServer/dist/esm/index';
+import { WebServerPlugin, WebServerRequest } from '../../native/webserver';
 
 import { GameStateProvider } from '../../providers/game-state/game-state';
 import { SettingsPage } from '../settings/settings';
-const { Modals } = Plugins;
+const { Modals, WebServerPlugin } = Plugins;
 
 @Component({
   selector: 'page-home',
@@ -48,7 +47,7 @@ export class HomePage {
   }
 
   async showServerSettings() {
-    var url = await TinyServerPlugin.getURL();
+    var url = await WebServerPlugin.getURL();
     console.log(url);
 
     await Modals.alert({

@@ -34,17 +34,16 @@ webpackEmptyAsyncContext.id = 151;
 
 /***/ }),
 
-/***/ 199:
+/***/ 198:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__capacitor_core__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_TinyServer_dist_esm_index__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_game_state_game_state__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__capacitor_core__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_game_state_game_state__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(199);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -94,8 +93,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-
-var Modals = __WEBPACK_IMPORTED_MODULE_2__capacitor_core__["a" /* Plugins */].Modals;
+var Modals = __WEBPACK_IMPORTED_MODULE_2__capacitor_core__["a" /* Plugins */].Modals, WebServerPlugin = __WEBPACK_IMPORTED_MODULE_2__capacitor_core__["a" /* Plugins */].WebServerPlugin;
 var HomePage = /** @class */ (function () {
     function HomePage(navCtrl, modalCtrl, platform, gameState) {
         this.navCtrl = navCtrl;
@@ -157,7 +155,7 @@ var HomePage = /** @class */ (function () {
             var url;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, __WEBPACK_IMPORTED_MODULE_3_TinyServer_dist_esm_index__["a" /* TinyServerPlugin */].getURL()];
+                    case 0: return [4 /*yield*/, WebServerPlugin.getURL()];
                     case 1:
                         url = _a.sent();
                         console.log(url);
@@ -173,7 +171,7 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.showSettings = function () {
-        var profileModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__settings_settings__["a" /* SettingsPage */]);
+        var profileModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__settings_settings__["a" /* SettingsPage */]);
         profileModal.present();
     };
     HomePage.prototype.reset = function () {
@@ -233,7 +231,7 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/Drew/Dev/Brutal Damage/ionic-game-clock/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Dual Attack\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only (click)="showServerSettings()" *ngIf="serverSettingsAvailable">\n        <ion-icon name="wifi"></ion-icon>\n      </button>\n      <button ion-button icon-only (click)="showSettings()">\n        <ion-icon name="settings"></ion-icon>\n      </button>\n      <button ion-button icon-only (click)="reset()">\n        <ion-icon name="refresh"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div>\n    <!--Timers-->\n    <ion-grid>\n      <ion-row>\n        <ion-col class="well left-clock timer">\n          <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer1.toString()}}</button>\n          <button ion-button large (click)="start(0)" *ngIf="!gameStarted">START</button>\n          <div class="stepper-container">\n              <button class="stepper" color="dark" ion-button small (click)="decrementCP(0)" [disabled]="!gameStarted">-</button>\n              <ion-label class="stepper-label">CP {{cp1}}</ion-label>\n              <button class="stepper" color="dark" ion-button small (click)="incrementCP(0)" [disabled]="!gameStarted">+</button>\n          </div>\n        </ion-col>\n        <ion-col col-auto>\n          <div class="center">\n            <button ion-button color="secondary" class="pause" (click)="togglePause()" [disabled]="!gameStarted">{{actionLabel()}}</button>\n          </div>\n          <div class="stepper-container">\n              <button class="stepper" color="dark" ion-button small (click)="decrementTurn()" [disabled]="!gameStarted">-</button>\n              <ion-label class="stepper-label">Turn {{turn}}</ion-label>\n              <button class="stepper" color="dark" ion-button small (click)="incrementTurn()" [disabled]="!gameStarted">+</button>\n          </div>\n        </ion-col>\n        <ion-col class="well right-clock timer">\n          <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer2.toString()}}</button>\n          <button ion-button large (click)="start(1)" *ngIf="!gameStarted">START</button>\n          <div class="stepper-container">\n              <button class="stepper" color="dark" ion-button small (click)="decrementCP(1)" [disabled]="!gameStarted">-</button>\n              <ion-label class="stepper-label">CP {{cp2}}</ion-label>\n              <button class="stepper" color="dark" ion-button small (click)="incrementCP(1)" [disabled]="!gameStarted">+</button>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/Drew/Dev/Brutal Damage/ionic-game-clock/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_4__providers_game_state_game_state__["a" /* GameStateProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__providers_game_state_game_state__["a" /* GameStateProvider */]])
     ], HomePage);
     return HomePage;
 }());
@@ -242,7 +240,7 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 200:
+/***/ 199:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -294,13 +292,13 @@ var SettingsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 201:
+/***/ 200:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(223);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -308,7 +306,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 224:
+/***/ 223:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -318,9 +316,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_game_state_game_state__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -374,18 +372,18 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 274:
+/***/ 273:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_game_state_game_state__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_TinyServer_dist_esm_index__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__capacitor_core__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_game_state_game_state__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -401,6 +399,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+var WebServerPlugin = __WEBPACK_IMPORTED_MODULE_2__capacitor_core__["a" /* Plugins */].WebServerPlugin;
 
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen, gameState) {
@@ -412,9 +411,11 @@ var MyApp = /** @class */ (function () {
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
-            __WEBPACK_IMPORTED_MODULE_5_TinyServer_dist_esm_index__["a" /* TinyServerPlugin */].startServer().then(function () {
-                __WEBPACK_IMPORTED_MODULE_5_TinyServer_dist_esm_index__["a" /* TinyServerPlugin */].onRequest(function (data) { return _this.handleOnRequest(data); });
-            });
+            if (platform.is('cordova')) {
+                WebServerPlugin.startServer().then(function () {
+                    WebServerPlugin.onRequest(function (data) { return _this.handleOnRequest(data); });
+                });
+            }
         });
     }
     MyApp.prototype.handleOnRequest = function (data) {
@@ -428,7 +429,7 @@ var MyApp = /** @class */ (function () {
                     turn: this._gameState.turn
                 }
             };
-            __WEBPACK_IMPORTED_MODULE_5_TinyServer_dist_esm_index__["a" /* TinyServerPlugin */].sendResponse({
+            WebServerPlugin.sendResponse({
                 requestId: data.requestId,
                 status: 200,
                 body: JSON.stringify(json),
@@ -438,7 +439,7 @@ var MyApp = /** @class */ (function () {
             });
         }
         else {
-            __WEBPACK_IMPORTED_MODULE_5_TinyServer_dist_esm_index__["a" /* TinyServerPlugin */].sendResponse({
+            WebServerPlugin.sendResponse({
                 requestId: data.requestId,
                 status: 200,
                 body: this.getPageHtml(),
@@ -454,7 +455,7 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/Drew/Dev/Brutal Damage/ionic-game-clock/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/Drew/Dev/Brutal Damage/ionic-game-clock/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_4__providers_game_state_game_state__["a" /* GameStateProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_5__providers_game_state_game_state__["a" /* GameStateProvider */]])
     ], MyApp);
     return MyApp;
 }());
@@ -463,7 +464,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 275:
+/***/ 287:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -593,7 +594,7 @@ var Timer = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 276:
+/***/ 288:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -618,8 +619,8 @@ var TimerPreset = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameStateProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__logic_Timer__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logic_TimerPreset__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__logic_Timer__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__logic_TimerPreset__ = __webpack_require__(288);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -862,5 +863,5 @@ var GameStateProvider = /** @class */ (function () {
 
 /***/ })
 
-},[201]);
+},[200]);
 //# sourceMappingURL=main.js.map

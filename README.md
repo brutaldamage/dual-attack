@@ -27,7 +27,7 @@ If you run the android or iOS app, when it starts, the app will create an intera
 If you hit the root of that url, you'll get a web page. That web page will display the same game info that is on the mobile app. How cool is that!?! From there, you can use that webpage to display the game info wherever you want. Display it as is on a tv, do some custom CSS to put the overlay in OBS (or something similar). The options are pretty limitless!
 
 ## known issues
-The webserver currently only works on iOS. We need to implement the webserver code to work with capacitor. This is being done via a new capacitor plugin called [TinyServer](https://github.com/keannan5390/tinyserver-capacitor-plugin).
+The webserver currently only works on iOS. The webserver code is implemented natively for android & iOS, and we still need to write the implemention for Android.
 
 ## want to contribute? 
 

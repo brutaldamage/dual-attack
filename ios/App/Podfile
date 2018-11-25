@@ -3,13 +3,11 @@ use_frameworks!
 
 target 'App' do
   # Add your Pods here
+  pod 'GCDWebServer', "~> 3.0"
 
-  pod "GCDWebServer", "~> 3.0"
   # Automatic Capacitor Pod dependencies, do not delete
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
   pod 'TinyServer', :path => '/Users/Drew/Dev/Brutal Damage/ionic-game-clock/node_modules/TinyServer'
-      pod 'CordovaPlugins', :path => '../capacitor-cordova-ios-plugins'
-    
   # Do not delete
 end

@@ -1,4 +1,4 @@
-package org.brutaldamage.clock;
+package blog.brutaldamage.dualattack;
 
 import android.os.Bundle;
 

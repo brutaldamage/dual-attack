@@ -1,6 +1,6 @@
 {
-  "appId": "org.brutaldamage.clock",
-  "appName": "game-clock",
+  "appId": "blog.brutaldamage.dualattack",
+  "appName": "Dual Attack",
   "bundledWebRuntime": false,
   "webDir": "www"
 }

@@ -1,35 +1,37 @@
-# ionic-game-clock
+# Dual Attack
 
 an attempt at rebuilding our game clock using ionic & capacitor.
 
 The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.
 
-The app is built for android currently, iOS is coming soon, using the [ionic capcitor framework](https://capacitor.ionicframework.com/). 
+The app is currently functional on web and iOS. Android is in the works (everything works except the web server). It is built using the [ionic capcitor framework](https://capacitor.ionicframework.com/). 
 
 ## what is it?
-We (Brutal Damage) wanted a way to display live updates of clock info for our Warmahordes games. We couldn't find anything that did the job, so we built one ourselves.
+We ([Brutal Damage](https://brutaldamage.blog)) wanted a way to display live updates of clock, turn, and CP info for our Warmahordes Youtube streams. We couldn't find anything that did the job, so we built one ourselves.
+
 The first version was a frankenstein hack of a few projects on github to make something that worked. ([See it over here](https://github.com/brutaldamage/game-clock))
 
-Once we proved that it worked, and we could create an easily portable solution to display clock and scoring info on a remote device/screen we decided we wanted to build it in something
-that was a easier to work with. Since we have a variety of developer skill sets in our meta, we opted to go with web stack for most of the core of the app, and use capacitor to get it working on mobile devices (and eventually electron).
+Once we proved out a solution for an easily portable app to display game info on a remote device/screen, we decided we wanted something that was easier to develop (not hacked together) and use a more current tech-stack. Since we have a variety of developer skill sets in our meta, we decided to go with a web stack for the core logic of the app, and use capacitor to get it working as a native app on mobile devices (and eventually electron).
 
 So thats what this repo is.
 
 ## how does it work?
-#### or at least, how it WILL work when finished.
-The UI is pretty simple, its a single UI with some configurable options (mostly just time on the clock). There are (or will) be some presets for default times for various game sizes.
 
-On app start, the app creates an interal web server. This web server can be accessed from any device that is on the same network as the phone running the app. Clicking the "internet" button in the top right will display the ip address the server can be accessed from.
+The UI is pretty simple, its a single UI with some configurable options (mostly just time on the clock). It includes some presets for default times for the standard tournament game sizes.
 
-If you hit the root of that url, you'll get a web page. That web page will display the same game info thats on the mobile app, but its accessible via a web browser on a different device! How cool is that? From there, you can pull that webpage into whatever you want. Display it as is on a tv, do some custom CSS to put the overlay in OBS (or something similar). The options are pretty limitless!
+### on the web
 
+### via the native app
+If you run the android or iOS app, when it starts, the app will create an interal web server. This web server can be accessed from any device on the same network as the phone/tabelt running the app. Clicking the "internet" button in the top right will display the IP address the server can be accessed from.
+
+If you hit the root of that url, you'll get a web page. That web page will display the same game info that is on the mobile app. How cool is that!?! From there, you can use that webpage to display the game info wherever you want. Display it as is on a tv, do some custom CSS to put the overlay in OBS (or something similar). The options are pretty limitless!
 
 ## known issues
-This repo was spun up recently, so things are still a work in progress.
-
-Right now, we've got an issue getting the web server code to process the game state info. So, if you try to hit the api url (http://{ipaddress}:8080/data) you'll see an error popped up in the app. 
+The webserver currently only works on iOS. We need to implement the webserver code to work with capacitor. This is being done via a new capacitor plugin called [TinyServer](https://github.com/keannan5390/tinyserver-capacitor-plugin).
 
 ## want to contribute? 
+
+### getting started
 
 *  clone the repository
 
@@ -45,12 +47,40 @@ Right now, we've got an issue getting the web server code to process the game st
   `npm install`
 
   this should pull in capacitor (its an npm dependency of the project).
-  
-* sync the latest web files to the android project
 
-  `npx cap add android`
+ * sync the latest web files to the android/ios/web projects
   
-  `npx cap sync`
+  `npx cap sync` 
+  
+### web app
 
-* open the gradle project in android studio (under the android folder)
+* run app in a web browser
+
+    `npm run start`
+
+### native app
+
+* open the native app project, either android or iOS if needed
+
+    `npx cap open android`
+    `npx cap open iOS`
+
 * run or debug to a device or emulator from android studio
+
+### do some stuff
+
+* write some code
+
+* create a pull request
+
+## publishing the app
+
+### mobile 
+
+Coming soon. There isn't a build pipeline or anything setup yet. So using the app is local dev only.
+
+### web
+
+The web app is published using github pages in the `gh-pages` branch of this repository. The `www` folder needs to be published to the root of the `gh-pages` branch.
+
+`git subtree push --prefix www origin gh-pages`

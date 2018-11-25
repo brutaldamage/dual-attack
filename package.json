@@ -1,8 +1,8 @@
 {
-  "name": "ionic-clock",
+  "name": "dual-attack",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Brutal Damage",
+  "homepage": "https://brutaldamage.github.io/dual-attack/",
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
@@ -39,5 +39,5 @@
     "@ionic/app-scripts": "3.1.11",
     "typescript": "~2.6.2"
   },
-  "description": "An Ionic project"
+  "description": "An application for Warmahores for tracking time, turn and control points during a game."
 }

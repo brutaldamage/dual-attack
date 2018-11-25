@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
-		3AC9136321A7BB81005A30BC /* WebServerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9136221A7BB81005A30BC /* WebServerPlugin.swift */; };
-		3AC9136621A7BBCE005A30BC /* WebServerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9136521A7BBCE005A30BC /* WebServerPlugin.m */; };
-		3AC9136821A7BE74005A30BC /* SynchronizedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9136721A7BE74005A30BC /* SynchronizedDictionary.swift */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
@@ -22,10 +19,6 @@
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
-		3AC9136221A7BB81005A30BC /* WebServerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServerPlugin.swift; sourceTree = "<group>"; };
-		3AC9136421A7BBCD005A30BC /* App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Bridging-Header.h"; sourceTree = "<group>"; };
-		3AC9136521A7BBCE005A30BC /* WebServerPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebServerPlugin.m; sourceTree = "<group>"; };
-		3AC9136721A7BE74005A30BC /* SynchronizedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedDictionary.swift; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,16 +52,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3AC9135C21A7BAD4005A30BC /* WebServer */ = {
-			isa = PBXGroup;
-			children = (
-				3AC9136221A7BB81005A30BC /* WebServerPlugin.swift */,
-				3AC9136521A7BBCE005A30BC /* WebServerPlugin.m */,
-				3AC9136721A7BE74005A30BC /* SynchronizedDictionary.swift */,
-			);
-			path = WebServer;
-			sourceTree = "<group>";
-		};
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
@@ -90,8 +73,6 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
-				3AC9136421A7BBCD005A30BC /* App-Bridging-Header.h */,
-				3AC9135C21A7BAD4005A30BC /* WebServer */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
@@ -146,7 +127,6 @@
 				TargetAttributes = {
 					504EC3031FED79650016851F = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -213,7 +193,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-App/Pods-App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Capacitor/Capacitor.framework",
 				"${BUILT_PRODUCTS_DIR}/CapacitorCordova/Cordova.framework",
-				"${BUILT_PRODUCTS_DIR}/CordovaPlugins/CordovaPlugins.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/TinyServer/TinyServer.framework",
 			);
@@ -221,7 +200,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Capacitor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cordova.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CordovaPlugins.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyServer.framework",
 			);
@@ -237,9 +215,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AC9136621A7BBCE005A30BC /* WebServerPlugin.m in Sources */,
-				3AC9136821A7BE74005A30BC /* SynchronizedDictionary.swift in Sources */,
-				3AC9136321A7BB81005A30BC /* WebServerPlugin.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,18 +357,14 @@
 			baseConfigurationReference = FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = "App/WebServer/GCDWebServer/**";
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
-				PRODUCT_BUNDLE_IDENTIFIER = org.brutaldamage.clock;
+				PRODUCT_BUNDLE_IDENTIFIER = blog.brutaldamage.dualattack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG USE_PUSH";
-				SWIFT_OBJC_BRIDGING_HEADER = "App/App-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -404,16 +375,13 @@
 			baseConfigurationReference = AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = "App/WebServer/GCDWebServer/**";
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.brutaldamage.clock;
+				PRODUCT_BUNDLE_IDENTIFIER = blog.brutaldamage.dualattack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = USE_PUSH;
-				SWIFT_OBJC_BRIDGING_HEADER = "App/App-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

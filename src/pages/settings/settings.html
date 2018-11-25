@@ -8,13 +8,21 @@
 
   <ion-navbar>
     <ion-title>Settings</ion-title>
+    <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+          <span ion-text color="primary" showWhen="ios">Cancel</span>
+          <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
+    <ion-list-header>
+      Game Settings
+    </ion-list-header>
     <ion-item>
       <ion-label>Game Size</ion-label>
       <ion-select [(ngModel)]="gameType" (ionChange)="onSelectChange($event)">
@@ -27,5 +35,10 @@
         <ion-option value="6">200 points / 150 minutes</ion-option>
       </ion-select>
     </ion-item>
+    <ion-list-header>
+      About the App
+    </ion-list-header>
+    <a ion-item href="http://brutaldamage.blog" target="_blank">Made by Brutal Damage</a>
+    <a ion-item href="https://github.com/brutaldamage/dual-attack" target="_blank">Code On Github</a>
   </ion-list>
 </ion-content>

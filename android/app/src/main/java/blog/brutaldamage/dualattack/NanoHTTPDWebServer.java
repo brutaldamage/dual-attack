@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.Log;
 
+import com.getcapacitor.JSObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,8 +65,8 @@ public class NanoHTTPDWebserver extends NanoHTTPD {
      * @param session
      * @return
      */
-    private JSONObject createJSONRequest(String requestId, IHTTPSession session) throws JSONException {
-        JSONObject jsonRequest = new JSONObject();
+    private JSObject createJSONRequest(String requestId, IHTTPSession session) {
+        JSObject jsonRequest = new JSObject();
         jsonRequest.put("requestId", requestId);
         jsonRequest.put("body", this.getBodyText(session));
         jsonRequest.put("headers", session.getHeaders());
@@ -195,14 +197,9 @@ public class NanoHTTPDWebserver extends NanoHTTPD {
 
         String requestUUID = UUID.randomUUID().toString();
 
-        JSONObject requestJson = null;
-        try {
-            requestJson = this.createJSONRequest(requestUUID, session));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        pluginResult.setKeepCallback(true);
-        this.webserver.onRequestCall.success(requestJson);
+        JSObject json = this.createJSONRequest(requestUUID, session);
+
+        this.webserver.onRequestCall.success(json);
 
         while (!this.webserver.responses.containsKey(requestUUID)) {
             try {

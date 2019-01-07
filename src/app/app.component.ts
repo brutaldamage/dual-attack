@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Plugins } from '@capacitor/core';
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { GameStateProvider } from '../providers/game-state/game-state';
 import { WebServerPlugin, WebServerRequest } from '../native/webserver';
 const { WebServerPlugin } = Plugins
@@ -17,13 +16,12 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, gameState: GameStateProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, gameState: GameStateProvider) {
     this._gameState = gameState;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      splashScreen.hide();
 
       if (platform.is('cordova')) {
         this.initWebServer();

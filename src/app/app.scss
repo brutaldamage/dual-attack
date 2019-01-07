@@ -21,6 +21,15 @@
     justify-content: center;
 }
 
+@font-face {
+    font-family: StrikeFighter;
+    src: url(../assets/fonts/strikefighter.ttf) format("ttf");
+}
+@font-face {
+    font-family: StrikeFighterBold;
+    src: url(../assets/fonts/strikefighterbold.ttf) format("ttf");
+}
+
 /*!
  * Bootstrap v4.1.2 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors

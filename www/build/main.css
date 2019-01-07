@@ -25689,6 +25689,16 @@ ion-navbar.toolbar {
   justify-content: center;
 }
 
+@font-face {
+  font-family: StrikeFighter;
+  src: url(../assets/fonts/strikefighter.ttf) format("ttf");
+}
+
+@font-face {
+  font-family: StrikeFighterBold;
+  src: url(../assets/fonts/strikefighterbold.ttf) format("ttf");
+}
+
 /*!
  * Bootstrap v4.1.2 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -35046,6 +35056,85 @@ page-home body {
   overflow: hidden;
 }
 
+page-home ion-title {
+  font-family: StrikeFighterBold;
+}
+
+page-home button.active {
+  background-color: #DC9550;
+}
+
+page-home button.inactive {
+  background-color: #7F7F7F;
+}
+
+page-home table {
+  font-family: StrikeFighterBold;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+page-home table th {
+  background: #EFEFEF;
+  color: #000000;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  height: 45px;
+}
+
+page-home table th #turn-counter-title {
+  color: #7F7F7F;
+}
+
+page-home table th #turn-counter {
+  color: #DC9550;
+}
+
+page-home table tr {
+  border: 1px solid transparent;
+  padding: .35em;
+}
+
+page-home table th, page-home table td {
+  padding: .625em;
+  text-align: left;
+}
+
+page-home table .players td div.container {
+  height: 100%;
+  width: 100%;
+}
+
+page-home table .players td div.container h2 {
+  text-transform: uppercase;
+  display: inline-block;
+  font-weight: bold;
+}
+
+page-home table .players td div.container h2.active {
+  border-bottom: 1.5px solid #DC9550;
+}
+
+page-home table .players .player-button {
+  width: 100%;
+  height: 75%;
+  font-size: 3em;
+  font-weight: bolder;
+}
+
+page-home table .footer td {
+  background: #EFEFEF;
+  color: #000000;
+  height: 75px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 page-home .timer {
   text-align: center;
 }
@@ -35085,18 +35174,35 @@ page-home .started .timer.running input {
 }
 
 page-home .stepper-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: table;
+  margin: auto;
 }
 
 page-home .stepper-container .stepper {
   width: 30px;
   height: 30px;
+  display: table-cell;
+  vertical-align: middle;
+  font-weight: bolder;
+  font-size: 2em;
 }
 
 page-home .stepper-container .stepper-label {
-  width: 50px;
+  display: table-cell;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  vertical-align: middle;
   text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 2em;
+}
+
+page-home .stepper-container .stepper-label .turn-counter {
+  background: #DC9550;
+  color: #fff;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
 }

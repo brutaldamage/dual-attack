@@ -25,11 +25,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class NanoHTTPDWebserver extends NanoHTTPD {
+public class NanoHTTPDWebServer extends NanoHTTPD {
 
     WebServerPlugin webserver;
 
-    public NanoHTTPDWebserver(int port, WebServerPlugin webserver) {
+    public NanoHTTPDWebServer(int port, WebServerPlugin webserver) {
         super(port);
         this.webserver = webserver;
     }

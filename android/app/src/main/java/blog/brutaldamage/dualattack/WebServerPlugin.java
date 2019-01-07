@@ -12,13 +12,8 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 import java.util.HashMap;
 
-import android.text.format.Formatter;
 import android.util.Log;
 
 
@@ -29,23 +24,23 @@ public class WebServerPlugin extends Plugin {
 
     private int _port;
     public HashMap<String, Object> responses = new HashMap<String, Object>();
-    public NanoHTTPDWebserver nanoHTTPDWebserver;
+    public NanoHTTPDWebServer nanoHTTPDWebServer;
 
     @PluginMethod()
     public void startServer(PluginCall call) {
         if(isConnectedInWifi()){
             try {
-                if(this.nanoHTTPDWebserver == null) {
+                if(this.nanoHTTPDWebServer == null) {
                     _port = call.getInt("port", 8080);
 
-                    this.nanoHTTPDWebserver = new NanoHTTPDWebserver(_port, this);
-                    this.nanoHTTPDWebserver.start();
+                    this.nanoHTTPDWebServer = new NanoHTTPDWebServer(_port, this);
+                    this.nanoHTTPDWebServer.start();
 
                     Log.d(
                             this.getClass().getName(),
                             "Server is running on: " +
-                                    this.nanoHTTPDWebserver.getHostname() + ":" +
-                                    this.nanoHTTPDWebserver.getListeningPort()
+                                    this.nanoHTTPDWebServer.getHostname() + ":" +
+                                    this.nanoHTTPDWebServer.getListeningPort()
                     );
                 }
 
@@ -72,8 +67,8 @@ public class WebServerPlugin extends Plugin {
 
     @PluginMethod()
     public void stopServer(PluginCall call) {
-        if (this.nanoHTTPDWebserver != null) {
-            this.nanoHTTPDWebserver.stop();
+        if (this.nanoHTTPDWebServer != null) {
+            this.nanoHTTPDWebServer.stop();
         }
         call.resolve();
     }

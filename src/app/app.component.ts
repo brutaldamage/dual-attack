@@ -26,11 +26,22 @@ export class MyApp {
       splashScreen.hide();
 
       if (platform.is('cordova')) {
-        WebServerPlugin.startServer().then(() => {
-          WebServerPlugin.onRequest((data: WebServerRequest) => this.handleOnRequest(data));
-        });
+        this.initWebServer();
       }
     });
+  }
+
+  private async initWebServer()
+  {
+    await WebServerPlugin.startServer();
+
+    WebServerPlugin.addListener("httpRequestReceived", (info: any) => {
+      this.handleOnRequest(info);
+    });
+
+    // WebServerPlugin.onRequest((data: WebServerRequest) => {
+    //    this.handleOnRequest(data);
+    // });
   }
 
   private handleOnRequest(data: WebServerRequest) {

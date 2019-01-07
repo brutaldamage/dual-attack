@@ -199,7 +199,7 @@ public class NanoHTTPDWebserver extends NanoHTTPD {
 
         JSObject json = this.createJSONRequest(requestUUID, session);
 
-        this.webserver.onRequestCall.success(json);
+        this.webserver.sendRequestEvent(json);
 
         while (!this.webserver.responses.containsKey(requestUUID)) {
             try {

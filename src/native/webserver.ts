@@ -1,4 +1,5 @@
 import { CallbackID } from '@capacitor/core'
+import { Plugin } from '@capacitor/core/dist/esm/definitions'
 
 declare global {
     interface PluginRegistry {
@@ -28,9 +29,8 @@ export interface WebServerResponse {
     headers: any;
 }
 
-export interface WebServerPlugin {
+export interface WebServerPlugin extends Plugin {
     getURL(): Promise<WebServerUrl>;
     startServer(): Promise<any>;
-    onRequest(callback: WebServerOnRequestCallback): CallbackID;
     sendResponse(response: WebServerResponse);
 }

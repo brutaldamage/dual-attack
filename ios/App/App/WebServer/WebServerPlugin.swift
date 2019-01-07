@@ -47,19 +47,9 @@ public class WebServerPlugin: CAPPlugin {
         
         self.webServer.start(withPort: UInt(port), bonjourName: nil)
         
-
-//        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK)
-//        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId)
-        
-//        let value = call.getString("value") ?? ""
         call.success([
             "status": "ok"
             ])
-    }
-    
-    @objc func onRequest(_ call: CAPPluginCall) {
-        self.onRequestCommand = call
-        call.save()
     }
     
     @objc func sendResponse(_ call: CAPPluginCall) {
@@ -112,11 +102,8 @@ public class WebServerPlugin: CAPPlugin {
         // Transform it into an dictionary for the javascript plugin
         let requestDict = self.requestToRequestDict(requestUUID: requestUUID, request: request as! GCDWebServerRequest)
         
-        // Do a call to the onRequestCommand to inform the JS plugin
-        if (self.onRequestCommand != nil) {
-            
-            self.onRequestCommand?.success(requestDict)
-        }
+        // Raise event to JS code to process request
+        self.notifyListeners("httpRequestReceived", data: requestDict)
         
         // Here we have to wait until the javascript block fetches the message and do a response
         while self.responses[requestUUID] == nil {

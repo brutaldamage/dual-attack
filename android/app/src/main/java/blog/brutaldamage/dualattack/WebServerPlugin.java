@@ -1,5 +1,8 @@
 package blog.brutaldamage.dualattack;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 
 import com.getcapacitor.JSObject;
@@ -25,47 +28,44 @@ import static android.content.Context.WIFI_SERVICE;
 public class WebServerPlugin extends Plugin {
 
     private int _port;
-    public HashMap<String, Object> responses;
-    public PluginCall onRequestCall;
+    public HashMap<String, Object> responses = new HashMap<String, Object>();
     public NanoHTTPDWebserver nanoHTTPDWebserver;
 
     @PluginMethod()
     public void startServer(PluginCall call) {
+        if(isConnectedInWifi()){
+            try {
+                if(this.nanoHTTPDWebserver == null) {
+                    _port = call.getInt("port", 8080);
 
-        try {
-            _port = call.getInt("port", 8080);
+                    this.nanoHTTPDWebserver = new NanoHTTPDWebserver(_port, this);
+                    this.nanoHTTPDWebserver.start();
 
-            this.nanoHTTPDWebserver = new NanoHTTPDWebserver(_port, this);
-            this.nanoHTTPDWebserver.start();
+                    Log.d(
+                            this.getClass().getName(),
+                            "Server is running on: " +
+                                    this.nanoHTTPDWebserver.getHostname() + ":" +
+                                    this.nanoHTTPDWebserver.getListeningPort()
+                    );
+                }
 
-            Log.d(
-                    this.getClass().getName(),
-                    "Server is running on: " +
-                            this.nanoHTTPDWebserver.getHostname() + ":" +
-                            this.nanoHTTPDWebserver.getListeningPort()
-            );
-
-            call.resolve();
+                call.resolve();
+            } catch (IOException ex) {
+                call.error(ex.getLocalizedMessage(), ex);
+            }
         }
-        catch(IOException ex)
-        {
-            call.error(ex.getLocalizedMessage(), ex);
+        else{
+            call.error("WIFI connection is required");
         }
-    }
-
-    @PluginMethod()
-    public void onRequest(PluginCall call) {
-        this.onRequestCall = call;
-        call.save();
-        // call will get its success value from the NanoServer implementation
     }
 
     @PluginMethod()
     public void sendResponse(PluginCall call) {
-//       Log.d(this.getClass().getName(), "Got sendResponse: " + args.toString());
         String requestId = call.getString("requestId");
 
-        this.responses.put(requestId, call.getData());
+        JSObject data = call.getData();
+
+        this.responses.put(requestId, data);
 
         call.resolve();
     }
@@ -86,31 +86,29 @@ public class WebServerPlugin extends Plugin {
         call.resolve(json);
     }
 
+    public void sendRequestEvent(JSObject data) {
+        JSObject ret = new JSObject();
+//        ret.put("value", "some value");
+        notifyListeners("httpRequestReceived", data);
+//        bridge.triggerDocumentJSEvent("httpRequestReceived", data.toString());
+    }
+
     private String getIpAccess() {
-        WifiManager wifiManager = (WifiManager) getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
+        Context context = getContext().getApplicationContext();
+        WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
         int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
-        final String formatedIpAddress = String.format("%d.%d.%d.%d", (ipAddress & 0xff), (ipAddress >> 8 & 0xff),
-                (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));
-//        String formatedIpAddress = getLocalIpAddress();
-		return "http://" + formatedIpAddress + ":" + _port;
+        final String formatedIpAddress = String.format("%d.%d.%d.%d", (ipAddress & 0xff), (ipAddress >> 8 & 0xff), (ipAddress >> 16 & 0xff), (ipAddress >> 24 & 0xff));
+        return "http://" + formatedIpAddress + ":" + _port;
 	}
 
-    public String getLocalIpAddress() {
-        try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress()) {
-                        String ip = Formatter.formatIpAddress(inetAddress.hashCode());
-//                        Log.i(TAG, "***** IP="+ ip);
-                        return ip;
-                    }
-                }
-            }
-        } catch (SocketException ex) {
-//            Log.e(TAG, ex.toString());
+    public boolean isConnectedInWifi() {
+        Context context = getContext().getApplicationContext();
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        NetworkInfo networkInfo = ((ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected()
+                && wifiManager.isWifiEnabled() && networkInfo.getTypeName().equals("WIFI")) {
+            return true;
         }
-        return null;
+        return false;
     }
 }

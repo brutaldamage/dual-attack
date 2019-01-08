@@ -10,7 +10,7 @@ before_deploy:
 deploy:
 - provider: script
   # deploys the application to now.sh
-  script: now www --public --token $NOW_TOKEN --team $NOW_TEAM && now alias dual-attack.app --token $NOW_TOKEN --team $NOW_TEAM
+  script: now www --public --token $NOW_TOKEN --team $NOW_TEAM --force && now alias dual-attack.app --token $NOW_TOKEN --team $NOW_TEAM
   skip_cleanup: true
   on:
     master: true

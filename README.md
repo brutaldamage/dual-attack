@@ -4,6 +4,8 @@ Android: [![Android Build status](https://build.appcenter.ms/v0.1/apps/38488105-
 
 iOS: [![iOS Build status](https://build.appcenter.ms/v0.1/apps/abe49c68-a184-456b-82cf-d5524f3f7899/branches/master/badge)](https://appcenter.ms)
 
+Web: [![Web Build Status](https://travis-ci.com/brutaldamage/dual-attack.svg?branch=master)](https://travis-ci.com/brutaldamage/dual-attack)
+
 Dual Attack is a web and mobile application built with [Ionic Capactior](https://capacitor.ionicframework.com/) that can be used to manage the death clock, turn counter and control point tracking during a Warmachine or Hordes game.
 
 The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.

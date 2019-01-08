@@ -1,16 +1,17 @@
 # Dual Attack
 
-Android: [![Android Build status](https://build.appcenter.ms/v0.1/apps/38488105-b297-42de-990e-061ad67d24e3/branches/master/badge)](https://appcenter.ms)
-
-iOS: [![iOS Build status](https://build.appcenter.ms/v0.1/apps/abe49c68-a184-456b-82cf-d5524f3f7899/branches/master/badge)](https://appcenter.ms)
-
-Web: [![Web Build Status](https://travis-ci.com/brutaldamage/dual-attack.svg?branch=master)](https://travis-ci.com/brutaldamage/dual-attack)
-
 Dual Attack is a web and mobile application built with [Ionic Capactior](https://capacitor.ionicframework.com/) that can be used to manage the death clock, turn counter and control point tracking during a Warmachine or Hordes game.
 
-The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.
+| Platform      | Build Status |
+| ----------- | ----------- |
+| Android      | [![Android Build status](https://build.appcenter.ms/v0.1/apps/38488105-b297-42de-990e-061ad67d24e3/branches/master/badge)](https://appcenter.ms)       |
+| iOS   | [![iOS Build status](https://build.appcenter.ms/v0.1/apps/abe49c68-a184-456b-82cf-d5524f3f7899/branches/master/badge)](https://appcenter.ms)        |
+| Web   | [![Web Build Status](https://travis-ci.com/brutaldamage/dual-attack.svg?branch=master)](https://travis-ci.com/brutaldamage/dual-attack)        |
 
-The app is currently functional on web and iOS. Android is in the works (everything works except the web server).
+## Start Playing
+* [On Android](https://install.appcenter.ms/orgs/brutaldamage/apps/dual-attack-1/distribution_groups/public)
+* [On the Web](https://dual-attack.app)
+* On iOS (coming soon)
 
 ## What Is It?
 We ([Brutal Damage](https://brutaldamage.blog)) wanted a way to display live updates of clock, turn, and CP info for our Warmachine & Hordes Youtube streams. We had trouble finding something that did what we wanted, so we decided to build what we couldn't find.
@@ -31,9 +32,6 @@ If you launch that url in a web browser you'll get a web page that displays the 
 #### via the web
 We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
 
-## Known Issues
-The webserver currently only works on iOS. Since this project is still a work in progress, we need to get the webserver implemented in the Android app. 
-
 ## want to contribute? 
 
 ### getting started
@@ -53,9 +51,9 @@ The webserver currently only works on iOS. Since this project is still a work in
 
   this should pull in capacitor (its an npm dependency of the project).
 
- * sync the latest web files to the android/ios/web projects
+ * build & sync the latest web files to the android/ios/web projects
   
-  `npx cap sync` 
+  `npx run build` 
   
 ### web app
 
@@ -82,12 +80,15 @@ The webserver currently only works on iOS. Since this project is still a work in
 
 ### mobile 
 
-Coming soon. There isn't a build pipeline or anything setup yet. So using the app is local dev only.
+Coming soon.
 
 ### web
 
-The web app is hosted on netlify.com currently. That gives us free hosting for static content (which this is) and gives us a really simple build pipeline. Netlify is hooked up to the master branch of the repository. Push some commits to master, and the changes should show up over at [https://dual-attack.app](https://dual-attack.app) in a few minutes.
+Coming soon.
 
+## Credits
+
+The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.
 
 ## Contributors
 * Drew Frisk: [keannan5390](https://github.com/keannan5390)

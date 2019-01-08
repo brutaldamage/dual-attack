@@ -8,9 +8,10 @@ before_deploy:
   - npm install now --no-save
   - now rm node-cd --token $NOW_TOKEN --yes || true
 deploy:
-- provider: script
-  # deploys the application to now.sh
-  script: now www --public --token $NOW_TOKEN --team $NOW_TEAM --force && now alias dual-attack.app --token $NOW_TOKEN --team $NOW_TEAM
-  skip_cleanup: true
+  provider: pages
+  skip-cleanup: true
+  github-token: $github_token  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  local-dir: www
   on:
-    master: true
+    branch: master

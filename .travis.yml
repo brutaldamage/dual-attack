@@ -4,14 +4,8 @@ node_js:
 cache:
   directories:
   - node_modules
-before_deploy:
-  - npm install now --no-save
-  - now rm node-cd --token $NOW_TOKEN --yes || true
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $github_token  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
-  local-dir: www
+  provider: script
+  script: chmod +x ./publish.sh && ./publish.sh
   on:
     branch: master

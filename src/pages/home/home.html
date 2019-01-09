@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Dual Attack
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showServerSettings()" *ngIf="serverSettingsAvailable">
+        <ion-icon name="wifi"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="showSettings()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="reset()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <table>
+    <tr>
+      <th colspan="7">
+        <div class="stepper-container">
+          <button class="stepper active" color="dark" ion-button small (click)="decrementTurn()" [disabled]="!gameStarted">-</button>
+          <ion-label class="stepper-label"><span id="turn-counter-title">Turn</span> <span id="turn-counter">{{turn}}</span></ion-label>
+          <button class="stepper active" color="dark" ion-button small (click)="incrementTurn()" [disabled]="!gameStarted">+</button>
+        </div>
+      </th>
+    </tr>
+    <tr class="players">
+      <td colspan="3">
+        <div class="container">
+          <h2 [ngClass]="timer1.isTicking ? 'active' : 'inactive'">Player 1</h2>
+          <button class="player-button" ion-button large (click)="move()" *ngIf="gameStarted" [ngClass]="timer1.isTicking ? 'active' : 'inactive'">{{timer1.toString()}}</button>
+          <button ion-button large (click)="start(0)" *ngIf="!gameStarted" class="active player-button">START</button>
+        </div>
+      </td>
+      <td>
+        <div class="center">
+          <button ion-button color="secondary" class="pause active" (click)="togglePause()" *ngIf="gameStarted">{{actionLabel()}}</button>
+        </div>
+      </td>
+      <td colspan="3">
+        <div class="container">
+          <h2 [ngClass]="timer2.isTicking ? 'active' : 'inactive'">Player 2</h2>
+          <button class="player-button" ion-button large (click)="move()" *ngIf="gameStarted" [ngClass]="timer2.isTicking ? 'active' : 'inactive'">{{timer2.toString()}}</button>
+          <button ion-button large (click)="start(1)" *ngIf="!gameStarted" class="active player-button">START</button>
+        </div>
+      </td>
+    </tr>
+    <tr class="footer">
+      <td colspan="3">
+        <div class="stepper-container">
+          <button class="stepper active" color="dark" ion-button small (click)="decrementCP(0)" [disabled]="!gameStarted">-</button>
+          <ion-label class="stepper-label">CP <span class="turn-counter">{{cp1}}</span></ion-label>
+          <button class="stepper active" color="dark" ion-button small (click)="incrementCP(0)" [disabled]="!gameStarted">+</button>
+        </div>
+      </td>
+      <td></td>
+      <td colspan="3">
+        <div class="stepper-container">
+          <button class="stepper active" color="dark" ion-button small (click)="decrementCP(1)" [disabled]="!gameStarted">-</button>
+          <ion-label class="stepper-label">CP <span class="turn-counter">{{cp2}}</span></ion-label>
+          <button class="stepper active" color="dark" ion-button small (click)="incrementCP(1)" [disabled]="!gameStarted">+</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div>
+    <!--Timers-->
+    <!-- <ion-grid>
+      <ion-row>
+        <ion-col class="well left-clock timer">
+          <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer1.toString()}}</button>
+          <button ion-button large (click)="start(0)" *ngIf="!gameStarted">START</button>
+          <div class="stepper-container">
+              <button class="stepper" color="dark" ion-button small (click)="decrementCP(0)" [disabled]="!gameStarted">-</button>
+              <ion-label class="stepper-label">CP {{cp1}}</ion-label>
+              <button class="stepper" color="dark" ion-button small (click)="incrementCP(0)" [disabled]="!gameStarted">+</button>
+          </div>
+        </ion-col>
+        <ion-col col-auto>
+          <div class="center">
+            <button ion-button color="secondary" class="pause" (click)="togglePause()" [disabled]="!gameStarted">{{actionLabel()}}</button>
+          </div>
+          <div class="stepper-container">
+              <button class="stepper" color="dark" ion-button small (click)="decrementTurn()" [disabled]="!gameStarted">-</button>
+              <ion-label class="stepper-label">Turn {{turn}}</ion-label>
+              <button class="stepper" color="dark" ion-button small (click)="incrementTurn()" [disabled]="!gameStarted">+</button>
+          </div>
+        </ion-col>
+        <ion-col class="well right-clock timer">
+          <button ion-button large (click)="move()" *ngIf="gameStarted">{{timer2.toString()}}</button>
+          <button ion-button large (click)="start(1)" *ngIf="!gameStarted">START</button>
+          <div class="stepper-container">
+              <button class="stepper" color="dark" ion-button small (click)="decrementCP(1)" [disabled]="!gameStarted">-</button>
+              <ion-label class="stepper-label">CP {{cp2}}</ion-label>
+              <button class="stepper" color="dark" ion-button small (click)="incrementCP(1)" [disabled]="!gameStarted">+</button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+  </div>
+</ion-content>

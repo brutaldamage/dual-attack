@@ -1,0 +1,155 @@
+page-home {
+
+    body { margin: 0; overflow: hidden; }
+
+    ion-title {
+      font-family: StrikeFighterBold;
+    }
+
+    button.active {
+      background-color: #DC9550;
+    }
+
+    button.inactive {
+      background-color: #7F7F7F;
+    }
+
+    table {
+
+      font-family: StrikeFighterBold;
+
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 100%;
+      height: 100%;
+
+      th {
+        background: #EFEFEF;
+        color: #000000;
+        // font-size: 2em;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        height: 45px;
+
+        #turn-counter-title {
+          color: #7F7F7F
+        }
+        #turn-counter {
+          color: #DC9550;
+        }
+      }
+
+      tr {
+        border: 1px solid transparent;
+        padding: .35em;
+      }
+
+      th, td {
+        padding: .625em;
+        text-align: left;
+      }
+
+      .players {
+        td {
+          // padding-left: 30px;
+          // padding-right: 30px;
+
+          div.container {
+            height: 100%;
+            width: 100%;
+
+            h2 {
+              text-transform: uppercase;
+              display: inline-block;
+              font-weight: bold;
+            }
+
+            h2.active {
+              border-bottom: 1.5px solid #DC9550;
+              // text-decoration: underline;
+              // text-decoration-color: #DC9550;
+            }
+          }
+        }
+
+        .player-button {
+          width: 100%;
+          height: 75%;
+          font-size: 3em;
+          font-weight: bolder;
+        }
+      }
+
+      .footer {
+        td {
+          background: #EFEFEF;
+          color: #000000;
+          height: 75px;
+          letter-spacing: .1em;
+          text-transform: uppercase;
+          padding-left: 30px;
+          padding-right: 30px;  
+        }
+      }
+    }
+
+    .timer  {
+      text-align: center;
+    }
+    .timer button {
+      font-size: 45px;
+      width: 275px;
+    }
+
+    .timer input {
+      margin: 47% 0 0;
+      font-size: 75px;
+      text-align: center;
+      width: 100%;
+      border: solid 4px black;
+      background: none;
+
+      // hide cursor
+      color: transparent;
+      text-shadow: 0 0 0 #2196f3;
+      &:focus {
+          outline: none;
+      }
+    }
+    .running { background: white; }
+    .started .timer input         { opacity: 0.3; border: solid 4px transparent;}
+    .started .timer.running input { opacity: 1.0; color: green; }
+
+    .stepper-container {
+        display: table;
+        margin: auto;
+      .stepper {
+        width: 30px;
+        height: 30px;
+        display: table-cell;
+        vertical-align: middle;
+        font-weight: bolder;
+        font-size: 2em;
+      }
+      .stepper-label {
+        display: table-cell;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 2em;
+
+        .turn-counter {
+          background: #DC9550;
+          color: #fff;
+          padding: 5px;
+          padding-left: 10px;
+          padding-right: 10px;
+          border-radius: 5px;
+        }
+      }
+  }
+}

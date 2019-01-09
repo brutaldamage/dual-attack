@@ -1,35 +1,40 @@
-# ionic-game-clock
+# Dual Attack
 
-an attempt at rebuilding our game clock using ionic & capacitor.
+Dual Attack is a web and mobile application built with [Ionic Capactior](https://capacitor.ionicframework.com/) that can be used to manage the death clock, turn counter and control point tracking during a Warmachine or Hordes game.
 
-The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.
+| Platform      | Build Status |
+| ----------- | ----------- |
+| Android      | [![Android Build status](https://build.appcenter.ms/v0.1/apps/38488105-b297-42de-990e-061ad67d24e3/branches/master/badge)](https://appcenter.ms)       |
+| iOS   | [![iOS Build status](https://build.appcenter.ms/v0.1/apps/abe49c68-a184-456b-82cf-d5524f3f7899/branches/master/badge)](https://appcenter.ms)        |
+| Web   | [![Web Build Status](https://travis-ci.com/brutaldamage/dual-attack.svg?branch=master)](https://travis-ci.com/brutaldamage/dual-attack)        |
 
-The app is built for android currently, iOS is coming soon, using the [ionic capcitor framework](https://capacitor.ionicframework.com/). 
+## Start Playing
+* [On Android](https://install.appcenter.ms/orgs/brutaldamage/apps/dual-attack-1/distribution_groups/public)
+* [On the Web](https://dual-attack.app)
+* On iOS (coming soon)
 
-## what is it?
-We (Brutal Damage) wanted a way to display live updates of clock info for our Warmahordes games. We couldn't find anything that did the job, so we built one ourselves.
-The first version was a frankenstein hack of a few projects on github to make something that worked. ([See it over here](https://github.com/brutaldamage/game-clock))
+## What Is It?
+We ([Brutal Damage](https://brutaldamage.blog)) wanted a way to display live updates of clock, turn, and CP info for our Warmachine & Hordes Youtube streams. We had trouble finding something that did what we wanted, so we decided to build what we couldn't find.
 
-Once we proved that it worked, and we could create an easily portable solution to display clock and scoring info on a remote device/screen we decided we wanted to build it in something
-that was a easier to work with. Since we have a variety of developer skill sets in our meta, we opted to go with web stack for most of the core of the app, and use capacitor to get it working on mobile devices (and eventually electron).
+The first version was a frankenstein hack of a few projects found around github. We used that to figure out what we needed and how we wanted things to work. If your curious about the first prototype, go check it out ([over here](https://github.com/brutaldamage/game-clock)).
 
-So thats what this repo is.
+Our meta has a few developers in it, but we all of slightly different skill sets when it comes to tech-stacks of choice. We chose Ionic Capacitor because it gives us the best of both worlds -- friendly web tech, and native mobile applications. This also gives us the ability to easily make a desktop app in the future if we want.
 
-## how does it work?
-#### or at least, how it WILL work when finished.
-The UI is pretty simple, its a single UI with some configurable options (mostly just time on the clock). There are (or will) be some presets for default times for various game sizes.
+## How Does It Work?
 
-On app start, the app creates an interal web server. This web server can be accessed from any device that is on the same network as the phone running the app. Clicking the "internet" button in the top right will display the ip address the server can be accessed from.
+The UI is pretty simple, its a single UI with some configurable options (mostly just time on the clock). It includes some presets for default times for the standard tournament game sizes.
 
-If you hit the root of that url, you'll get a web page. That web page will display the same game info thats on the mobile app, but its accessible via a web browser on a different device! How cool is that? From there, you can pull that webpage into whatever you want. Display it as is on a tv, do some custom CSS to put the overlay in OBS (or something similar). The options are pretty limitless!
+#### via the native mobile apps
+If you run the android or iOS app, when it starts, the app will create an interal web server. This web server can be accessed from any device on the same network as the phone/tabelt running the app. Clicking the "internet" button in the top right nav bar will display the IP address the server can be accessed from.
 
+If you launch that url in a web browser you'll get a web page that displays the information hit the root of that url. That web page will display the game stats from the mobile app in realtime. How cool is that!?! This allows the game stats to easily be displayed on an external device, such as a TV. For us, we open the url in [OBS](https://obsproject.com/) and put some custom CSS over the top of it so it can be displayed on our streams and recordings.
 
-## known issues
-This repo was spun up recently, so things are still a work in progress.
-
-Right now, we've got an issue getting the web server code to process the game state info. So, if you try to hit the api url (http://{ipaddress}:8080/data) you'll see an error popped up in the app. 
+#### via the web
+We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
 
 ## want to contribute? 
+
+### getting started
 
 *  clone the repository
 
@@ -45,12 +50,46 @@ Right now, we've got an issue getting the web server code to process the game st
   `npm install`
 
   this should pull in capacitor (its an npm dependency of the project).
-  
-* sync the latest web files to the android project
 
-  `npx cap add android`
+ * build & sync the latest web files to the android/ios/web projects
   
-  `npx cap sync`
+  `npx run build` 
+  
+### web app
 
-* open the gradle project in android studio (under the android folder)
+* run app in a web browser
+
+    `npm run start`
+
+### native app
+
+* open the native app project, either android or iOS if needed
+
+    `npx cap open android`
+    `npx cap open iOS`
+
 * run or debug to a device or emulator from android studio
+
+### do some stuff
+
+* write some code
+
+* create a pull request
+
+## publishing the app
+
+### mobile 
+
+Coming soon.
+
+### web
+
+Coming soon.
+
+## Credits
+
+The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.
+
+## Contributors
+* Drew Frisk: [keannan5390](https://github.com/keannan5390)
+* Lance Aeby: [lanceaeby](https://github.com/lanceaeby)

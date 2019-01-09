@@ -1,0 +1,6 @@
+{
+  "appId": "blog.brutaldamage.dualattack",
+  "appName": "Dual Attack",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

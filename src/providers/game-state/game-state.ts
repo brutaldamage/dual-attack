@@ -169,7 +169,8 @@ export class GameStateProvider {
   }
 
   incrementTurn() {
-    this._turnCounter++;
+    if(this._turnCounter < 14)
+      this._turnCounter++;
   }
 
   decrementTurn() {

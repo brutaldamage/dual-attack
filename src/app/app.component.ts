@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { Plugins } from '@capacitor/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GameStateProvider } from '../providers/game-state/game-state';
@@ -16,7 +17,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, gameState: GameStateProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, gameState: GameStateProvider, private storage: Storage) {
     this._gameState = gameState;
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -29,17 +30,16 @@ export class MyApp {
     });
   }
 
-  private async initWebServer()
-  {
-    await WebServerPlugin.startServer();
+  private async initWebServer() {
 
-    WebServerPlugin.addListener("httpRequestReceived", (info: any) => {
-      this.handleOnRequest(info);
-    });
+    let enabled = await this.storage.get('serverEnabled') as boolean;
 
-    // WebServerPlugin.onRequest((data: WebServerRequest) => {
-    //    this.handleOnRequest(data);
-    // });
+    if (enabled) {
+      await WebServerPlugin.startServer();
+      WebServerPlugin.addListener("httpRequestReceived", (info: any) => {
+        this.handleOnRequest(info);
+      });
+    }
   }
 
   private handleOnRequest(data: WebServerRequest) {

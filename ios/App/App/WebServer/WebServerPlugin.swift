@@ -38,18 +38,24 @@ public class WebServerPlugin: CAPPlugin {
     }
     
     @objc func startServer(_ call: CAPPluginCall) {
-        
-        var port = 8080
-        let portValue = call.getInt("port")
-        if portValue != nil {
-            port = portValue as! Int;
+        if self.webServer != nil || !self.webServer.isRunning {
+            var port = 8080
+            let portValue = call.getInt("port")
+            if portValue != nil {
+                port = portValue as! Int;
+            }
+            
+            self.webServer.start(withPort: UInt(port), bonjourName: nil)
         }
-        
-        self.webServer.start(withPort: UInt(port), bonjourName: nil)
-        
         call.success([
             "status": "ok"
             ])
+    }
+    
+     @objc func stopServer(_ call: CAPPluginCall) {
+        if self.webServer != nil && self.webServer.isRunning {
+            self.webServer.stop();
+        }
     }
     
     @objc func sendResponse(_ call: CAPPluginCall) {
@@ -68,14 +74,6 @@ public class WebServerPlugin: CAPPlugin {
     }
     
     func initHTTPRequestHandlers() {
-        
-//        self.webServer.addHandler(
-//            match: {
-//            (requestMethod, requestURL, requestHeaders, urlPath, urlQuery) -> GCDWebServerRequest? in
-//            return GCDWebServerDataRequest(method: requestMethod, url: requestURL, headers: requestHeaders, path: urlPath, query: urlQuery)
-//        }) { (<#GCDWebServerRequest?#>, <#GCDWebServerCompletionBlock?#>) in
-//            <#code#>
-//        }
         
         self.webServer.addHandler(
             match: {

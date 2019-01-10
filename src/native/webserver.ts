@@ -32,5 +32,6 @@ export interface WebServerResponse {
 export interface WebServerPlugin extends Plugin {
     getURL(): Promise<WebServerUrl>;
     startServer(): Promise<any>;
+    stopServer(): Promise<any>;
     sendResponse(response: WebServerResponse);
 }

@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { Plugins } from '@capacitor/core';
+import { Plugins, AppState } from '@capacitor/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GameStateProvider } from '../providers/game-state/game-state';
 import { WebServerPlugin, WebServerRequest } from '../native/webserver';
-const { WebServerPlugin } = Plugins
+
+const { WebServerPlugin, App, Storage } = Plugins
 
 import { HomePage } from '../pages/home/home';
+import { stat } from 'fs';
 @Component({
   templateUrl: 'app.html'
 })
@@ -25,12 +27,26 @@ export class MyApp {
 
       if (platform.is('cordova')) {
         this.initWebServer();
+
+        App.addListener('appStateChange', async (state: AppState) => {
+          if (!state.isActive) {
+            gameState.togglePause(true);
+            let bundle = gameState.getBundle();
+            await Storage.set({ key: 'appState', value: JSON.stringify(bundle) });
+          }
+          else {
+            // gameState.togglePause(true);
+            let appState = await Storage.get({ key: 'appState' });
+            if (appState && appState.value) {
+              this._gameState.restoreBundle(JSON.parse(appState.value));
+            }
+          }
+        });
       }
     });
   }
 
-  private async initWebServer()
-  {
+  private async initWebServer() {
     await WebServerPlugin.startServer();
 
     WebServerPlugin.addListener("httpRequestReceived", (info: any) => {

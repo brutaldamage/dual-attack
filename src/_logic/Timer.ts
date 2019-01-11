@@ -130,4 +130,22 @@ export class Timer {
   
       return output;
     };
+  
+    getBundle() : any {
+      return {
+        time: this.time,
+        increment: this.increment,
+        isTicking: this.isTicking,
+        isOutOfTime: this.isOutOfTime
+      }
+    }
+
+    restoreBundle(bundle: any) {
+      console.log("restore timer bundle: ");
+      console.log(JSON.stringify(bundle));
+      this.time = Number(bundle.time);
+      this.increment = Number(bundle.increment);
+      this.isTicking = bundle.isTicking === "true";
+      this.isOutOfTime = bundle.isOutOfTime === "true";
+    }
   }

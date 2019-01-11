@@ -49,9 +49,9 @@ We weren't originally going to publish this as a web application, but capacitor 
 
   `npm install`
 
-  this should pull in capacitor (its an npm dependency of the project).
+  this should pull in capacitor (its a npm dependency of the project).
 
- * build & sync the latest web files to the android/ios/web projects
+* build & sync the latest web files to the android/ios/web projects
   
   `npx run build` 
   
@@ -88,8 +88,11 @@ Coming soon.
 
 ## Credits
 
-The UI of this app is based on [https://github.com/mishabosin/web-chess-clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with ionic 3.
+The UI of this app is based on the work of [Misha Bosin's Web chess clock](https://github.com/mishabosin/web-chess-clock). It was ported to work with Ionic 3.
 
-## Contributors
+### Contributors
 * Drew Frisk: [keannan5390](https://github.com/keannan5390)
 * Lance Aeby: [lanceaeby](https://github.com/lanceaeby)
+
+### 3rd Party
+* Icon designed by [Freepik](https://www.flaticon.com/authors/freepik) from **Flaticon**.

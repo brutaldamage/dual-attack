@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
 import { GameStateProvider } from '../providers/game-state/game-state';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -16,7 +17,7 @@ import { GameStateProvider } from '../providers/game-state/game-state';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

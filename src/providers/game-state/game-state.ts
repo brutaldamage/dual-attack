@@ -69,8 +69,8 @@ export class GameStateProvider {
         increment: 1
       }),
       new TimerPreset({
-        name: "40 minutes",
-        minutes: 43,
+        name: "42 minutes",
+        minutes: 42,
         seconds: 0,
         increment: 1
       }),

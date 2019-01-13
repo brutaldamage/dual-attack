@@ -11,7 +11,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // keep th the device awake while the app is running
     UIApplication.shared.isIdleTimerDisabled = true
-    UIApplication.shared.setStatusBarHidden(true, with: UIStatusBarAnimation.none)
     
     // Override point for customization after application launch.
     return true

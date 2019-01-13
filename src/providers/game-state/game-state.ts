@@ -69,8 +69,8 @@ export class GameStateProvider {
         increment: 1
       }),
       new TimerPreset({
-        name: "40 minutes",
-        minutes: 43,
+        name: "42 minutes",
+        minutes: 42,
         seconds: 0,
         increment: 1
       }),
@@ -169,7 +169,8 @@ export class GameStateProvider {
   }
 
   incrementTurn() {
-    this._turnCounter++;
+    if (this._turnCounter < 14)
+      this._turnCounter++;
   }
 
   decrementTurn() {
@@ -179,7 +180,7 @@ export class GameStateProvider {
 
   incrementCP(playerIndex: number) {
 
-    if(this._turnCounter < 4)
+    if (this._turnCounter < 4)
       return;
 
     if (playerIndex == 0)
@@ -190,12 +191,31 @@ export class GameStateProvider {
 
   decrementCP(playerIndex: number) {
 
-    if(this._turnCounter < 4)
+    if (this._turnCounter < 4)
       return;
 
     if (playerIndex == 0 && this._cp1 > 0)
       this._cp1--;
     else if (playerIndex == 1 && this._cp2 > 0)
       this._cp2--;
+  }
+
+  getBundle(): any {
+    return {
+      turnCounter: this._turnCounter,
+      cp1: this._cp1,
+      cp2: this._cp2,
+      timer1: this.timer1.getBundle(),
+      timer2: this.timer2.getBundle()
+    }
+  }
+  restoreBundle(bundle: any) {
+    console.log("restore game state: ");
+    console.log(JSON.stringify(bundle));
+    this._turnCounter = bundle.turnCounter;
+    this._cp1 = bundle.cp1;
+    this._cp2 = bundle.cp2;
+    this.timer1.restoreBundle(bundle.timer1);
+    this.timer2.restoreBundle(bundle.timer2);
   }
 }

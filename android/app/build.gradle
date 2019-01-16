@@ -15,7 +15,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue("string", "app_center_secret", "${APP_CENTER_SECRET}")
+            resValue("string", "app_center_secret", "\"${System.env.APP_CENTER_SECRET}\"")
         }
     }
     lintOptions {

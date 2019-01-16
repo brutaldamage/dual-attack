@@ -18,9 +18,8 @@ public class MainActivity extends BridgeActivity {
     super.onCreate(savedInstanceState);
 
 
-    String appCenterKey = getAppCenterSecret();
-    if(appCenterKey != null) {
-      AppCenter.start(getApplication(), appCenterKey, Analytics.class, Crashes.class);
+    if(BuildConfig.app_center_secret != "") {
+      AppCenter.start(getApplication(), BuildConfig.app_center_secret, Analytics.class, Crashes.class);
     }
 
     requestWindowFeature(Window.FEATURE_NO_TITLE);

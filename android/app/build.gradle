@@ -11,11 +11,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-
+        debug {
+            buildConfigField("String", "app_center_secret", "")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue("string", "app_center_secret", "\"${System.env.APP_CENTER_SECRET}\"")
+            buildConfigField("String", "app_center_secret", "\"${System.env.APP_CENTER_SECRET}\"")
         }
     }
     lintOptions {

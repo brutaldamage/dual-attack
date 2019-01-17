@@ -12,7 +12,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "app_center_secret", "")
+            buildConfigField("String", "app_center_secret", "\"\"")
         }
         release {
             minifyEnabled false

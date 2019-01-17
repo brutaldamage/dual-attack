@@ -29,8 +29,18 @@ If you run the android or iOS app, when it starts, the app will create an intera
 
 If you launch that url in a web browser you'll get a web page that displays the information hit the root of that url. That web page will display the game stats from the mobile app in realtime. How cool is that!?! This allows the game stats to easily be displayed on an external device, such as a TV. For us, we open the url in [OBS](https://obsproject.com/) and put some custom CSS over the top of it so it can be displayed on our streams and recordings.
 
+**customize the data overlay**
+If you want to customize the data overlay beyond the webpage, the web server exposes the game state as a JSON object. Hit http://{IPAddress}:8080/data in a web browser or with your scripting language of choice to get a JSON object containing all the game data.
+
+We use the following CSS in our OBS setup if you want to use it as a starting point:
+
+`/* todo: css here */`
+
 #### via the web
 We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
+
+## Customizing
+We use dual attack with OBS by overlaying the web page served from the web server on the camera feed. But, since OBS is really flexible, you can adjust as necessary. The web server has 2 endpoints available, one to return the game state via a JSON response, and one to return the simple web pages.
 
 ## want to contribute? 
 

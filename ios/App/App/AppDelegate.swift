@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIApplication.shared.isIdleTimerDisabled = true
     
     let appCenterSecret = AppCenterCredentials.appSecret;
-    if appCenterSecret != "" {
+    if appCenterSecret != "" && appCenterSecret != nil {
         MSAppCenter.start(appCenterSecret, withServices: [MSAnalytics.self, MSCrashes.self])
     }
     

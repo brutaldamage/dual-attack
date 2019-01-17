@@ -4,3 +4,8 @@ node_js:
 cache:
   directories:
   - node_modules
+deploy:
+  provider: script
+  script: chmod +x ./publish.sh && ./publish.sh
+  on:
+    branch: master

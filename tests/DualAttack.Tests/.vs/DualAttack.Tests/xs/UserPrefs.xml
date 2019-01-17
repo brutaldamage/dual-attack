@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{137D42D4-5A50-41D3-9712-2EF8C280242A}|Unit Tests">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AppInitializer.cs">
+    <Files>
+      <File FileName="AppInitializer.cs" Line="30" Column="50" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.DualAttack.Tests FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

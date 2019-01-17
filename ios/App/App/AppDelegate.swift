@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let appCenterSecret = AppCenterCredentials.appSecret;
     if appCenterSecret != "" {
-        MSAppCenter.start("{Your App Secret}", withServices: [MSAnalytics.self, MSCrashes.self])
+        MSAppCenter.start(appCenterSecret, withServices: [MSAnalytics.self, MSCrashes.self])
     }
     
     // Override point for customization after application launch.

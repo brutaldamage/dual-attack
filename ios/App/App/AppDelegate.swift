@@ -1,8 +1,5 @@
 import UIKit
 import Capacitor
-import AppCenter
-import AppCenterCrashes
-import AppCenterAnalytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,11 +11,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // keep th the device awake while the app is running
     UIApplication.shared.isIdleTimerDisabled = true
-    
-    let appCenterSecret = AppCenterCredentials.appSecret;
-    if appCenterSecret != "" && appCenterSecret != nil {
-        MSAppCenter.start(appCenterSecret, withServices: [MSAnalytics.self, MSCrashes.self])
-    }
     
     // Override point for customization after application launch.
     return true

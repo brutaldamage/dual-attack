@@ -14,7 +14,3 @@ sudo installer -store -pkg "$HOME/Downloads/node-installer.pkg" -target "/"
 ##
 (cd ../../ && npm install)
 (cd ../../ && npm run build)
-
-
-## grant permission to run ruby script
-chmod +x ./create-appcenter-credentials.rb

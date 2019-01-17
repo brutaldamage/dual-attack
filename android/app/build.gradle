@@ -11,13 +11,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug {
-            buildConfigField("String", "app_center_secret", "\"\"")
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "app_center_secret", "\"${System.env.APP_CENTER_SECRET}\"")
         }
     }
     lintOptions {
@@ -49,10 +45,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
-
-    def appCenterSdkVersion = '1.11.0'
-    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
-    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
 }
 
 apply from: 'capacitor.build.gradle'

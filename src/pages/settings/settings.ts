@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { GameStateProvider } from '../../providers/game-state/game-state';
-import { Plugins } from '@capacitor/core';
 
 /**
  * Generated class for the SettingsPage page.
@@ -31,11 +30,4 @@ export class SettingsPage {
     this.viewCtrl.dismiss();
   }
 
-  async onBrutalDamageLinkClicked() {
-    await Plugins.Browser.open({ url: 'http://brutaldamage.blog' });
-  }
-
-  async onGithubLinkClicked() {
-    await Plugins.Browser.open({ url: 'https://github.com/brutaldamage/dual-attack' });
-  }
 }

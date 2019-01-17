@@ -14,6 +14,11 @@ const { Modals, WebServerPlugin } = Plugins;
 })
 export class HomePage {
 
+  private _darkTheme: boolean;
+  get darkTheme(): Boolean {
+    return this._darkTheme;
+  }
+
   get serverSettingsAvailable(): Boolean {
     return this.platform.is('cordova');
   }
@@ -43,6 +48,11 @@ export class HomePage {
   }
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, private platform: Platform, private gameState: GameStateProvider) {
+
+    Plugins.Storage.get({ key: "darkTheme"})
+      .then(value => {
+        this._darkTheme = (value.value === "true");
+      });
 
   }
 

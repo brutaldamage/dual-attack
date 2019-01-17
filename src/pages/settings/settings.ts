@@ -16,10 +16,25 @@ import { Plugins } from '@capacitor/core';
 })
 export class SettingsPage {
 
+  private _darkTheme: Boolean;
+
+  get darkTheme(): Boolean {
+    return this._darkTheme;
+  }
+
+  set darkTheme(value: Boolean) {
+    this._darkTheme = value;
+  }
+
   gameType: number;
 
-  constructor(public viewCtrl: ViewController,  private gameState: GameStateProvider) {
+  constructor(public viewCtrl: ViewController, private gameState: GameStateProvider) {
     this.gameType = gameState.currentGameSetting;
+
+    Plugins.Storage.get({ key: "darkTheme" })
+      .then(value => {
+        this._darkTheme = (value.value === "true");
+      });
   }
 
   onSelectChange(selectedValue: number) {

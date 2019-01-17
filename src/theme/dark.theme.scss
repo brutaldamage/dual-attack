@@ -1,0 +1,41 @@
+.dark-theme.content {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.dark-theme {
+
+    .toolbar-title-md, .toolbar-title-ios {
+    color: #ffffff
+  }
+  
+  .toolbar-background-md, .toolbar-background-ios {
+    background: #181818;
+  }
+
+  .bar-buttons {
+      color: #ffffff;
+  }
+
+  .bar-button-default-ios {
+      .text-ios {
+          color: #ffffff;
+      }
+  }
+
+  .item {
+      background-color: #222222;
+      color: #ffffff;
+  }
+  
+  .list-header-ios { color: #ffffff;}
+
+    .ion-md-close::before {
+          color: #ffffff;
+      }
+
+      .checkbox-md .checkbox-checked, .checkbox-ios .checkbox-checked {
+        border-color:gray;
+        background-color: gray;
+    }
+}

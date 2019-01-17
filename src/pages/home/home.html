@@ -32,20 +32,20 @@
       <td colspan="3">
         <div class="container">
           <h2 [ngClass]="timer1.isTicking ? 'active' : 'inactive'">Player 1</h2>
-          <button class="player-button" color="dark" ion-button large (click)="move()" *ngIf="gameStarted" [ngClass]="timer1.isTicking ? 'active' : 'inactive'">{{timer1.toString()}}</button>
-          <button ion-button large color="dark" (click)="start(0)" *ngIf="!gameStarted" class="active player-button">START</button>
+          <button class="player-button" ion-button large (click)="move()" *ngIf="gameStarted" [ngClass]="timer1.isTicking ? 'active' : 'inactive'">{{timer1.toString()}}</button>
+          <button ion-button large (click)="start(0)" *ngIf="!gameStarted" class="active player-button">START</button>
         </div>
       </td>
       <td>
         <div class="center">
-          <button ion-button color="dark" class="pause active" (click)="togglePause()" *ngIf="gameStarted">{{actionLabel()}}</button>
+          <button ion-button color="secondary" class="pause active" (click)="togglePause()" *ngIf="gameStarted">{{actionLabel()}}</button>
         </div>
       </td>
       <td colspan="3">
         <div class="container">
           <h2 [ngClass]="timer2.isTicking ? 'active' : 'inactive'">Player 2</h2>
-          <button class="player-button" ion-button color="dark" large (click)="move()" *ngIf="gameStarted" [ngClass]="timer2.isTicking ? 'active' : 'inactive'">{{timer2.toString()}}</button>
-          <button ion-button color="dark" large (click)="start(1)" *ngIf="!gameStarted" class="active player-button">START</button>
+          <button class="player-button" ion-button large (click)="move()" *ngIf="gameStarted" [ngClass]="timer2.isTicking ? 'active' : 'inactive'">{{timer2.toString()}}</button>
+          <button ion-button large (click)="start(1)" *ngIf="!gameStarted" class="active player-button">START</button>
         </div>
       </td>
     </tr>

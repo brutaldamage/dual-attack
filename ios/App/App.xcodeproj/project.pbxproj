@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
-		3A477EB221F01B720038BEDC /* AppCenterCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */; };
 		3AE584F921AA4EA400350426 /* WebServerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584F821AA4EA400350426 /* WebServerPlugin.swift */; };
 		3AE584FD21AA4EE600350426 /* SynchronizedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584FB21AA4EE600350426 /* SynchronizedDictionary.swift */; };
 		3AE584FE21AA4EE600350426 /* WebServerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584FC21AA4EE600350426 /* WebServerPlugin.m */; };
@@ -23,7 +22,6 @@
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
-		3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterCredentials.swift; sourceTree = "<group>"; };
 		3AE584F821AA4EA400350426 /* WebServerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServerPlugin.swift; sourceTree = "<group>"; };
 		3AE584FA21AA4EE600350426 /* App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Bridging-Header.h"; sourceTree = "<group>"; };
 		3AE584FB21AA4EE600350426 /* SynchronizedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedDictionary.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
-				3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -124,7 +121,6 @@
 			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "App" */;
 			buildPhases = (
 				6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */,
-				3A31F3E321EEF594008137FE /* ShellScript */,
 				504EC3001FED79650016851F /* Sources */,
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
@@ -190,23 +186,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A31F3E321EEF594008137FE /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./create-appcenter-credentials.rb\n";
-		};
 		6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,7 +237,6 @@
 				3AE584F921AA4EA400350426 /* WebServerPlugin.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 				3AE584FD21AA4EE600350426 /* SynchronizedDictionary.swift in Sources */,
-				3A477EB221F01B720038BEDC /* AppCenterCredentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

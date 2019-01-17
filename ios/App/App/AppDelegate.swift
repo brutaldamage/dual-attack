@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // keep th the device awake while the app is running
     UIApplication.shared.isIdleTimerDisabled = true
     
-    let appCenterSecret = Environment.appCenterSecret;
-    if appCenterSecret != "$(APP_CENTER_SECRET)" {
+    let appCenterSecret = AppCenterCredentials.appSecret;
+    if appCenterSecret != "" {
         MSAppCenter.start("{Your App Secret}", withServices: [MSAnalytics.self, MSCrashes.self])
     }
     

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
-		3A31F3DF21EEF092008137FE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A31F3DE21EEF092008137FE /* Environment.swift */; };
-		3A31F3E221EEF383008137FE /* CI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A31F3E121EEF383008137FE /* CI.swift */; };
 		3A477EB221F01B720038BEDC /* AppCenterCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */; };
 		3AE584F921AA4EA400350426 /* WebServerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584F821AA4EA400350426 /* WebServerPlugin.swift */; };
 		3AE584FD21AA4EE600350426 /* SynchronizedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584FB21AA4EE600350426 /* SynchronizedDictionary.swift */; };
@@ -25,8 +23,6 @@
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
-		3A31F3DE21EEF092008137FE /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		3A31F3E121EEF383008137FE /* CI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CI.swift; sourceTree = "<group>"; };
 		3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterCredentials.swift; sourceTree = "<group>"; };
 		3AE584F821AA4EA400350426 /* WebServerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServerPlugin.swift; sourceTree = "<group>"; };
 		3AE584FA21AA4EE600350426 /* App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -106,8 +102,6 @@
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
-				3A31F3DE21EEF092008137FE /* Environment.swift */,
-				3A31F3E121EEF383008137FE /* CI.swift */,
 				3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */,
 			);
 			path = App;
@@ -211,7 +205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n${SRCROOT}/CreateAppCenterCredentials.rb\nfi\n";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n${SRCROOT}/create-appcenter-credentails.rb\nfi\n";
 		};
 		6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -264,9 +258,7 @@
 				3AE584F921AA4EA400350426 /* WebServerPlugin.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 				3AE584FD21AA4EE600350426 /* SynchronizedDictionary.swift in Sources */,
-				3A31F3DF21EEF092008137FE /* Environment.swift in Sources */,
 				3A477EB221F01B720038BEDC /* AppCenterCredentials.swift in Sources */,
-				3A31F3E221EEF383008137FE /* CI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

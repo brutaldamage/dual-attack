@@ -42,6 +42,14 @@ export class HomePage {
     return this.gameState.cp2;
   }
 
+  get showPause(): boolean {
+    return this.timer1.isTicking || this.timer2.isTicking;
+  }
+
+  get showResume(): boolean {
+    return !this.showPause && this.gameStarted;
+  }
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, private platform: Platform, private gameState: GameStateProvider) {
 
   }

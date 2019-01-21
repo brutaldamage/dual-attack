@@ -3,6 +3,7 @@ import { ViewController } from 'ionic-angular';
 import { GameStateProvider } from '../../providers/game-state/game-state';
 import { Plugins } from '@capacitor/core';
 
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -27,19 +28,31 @@ export class SettingsPage {
   }
 
   gameType: number;
+  hours: number;
+  minutes: number;
 
   constructor(public viewCtrl: ViewController, private gameState: GameStateProvider) {
     this.gameType = gameState.currentGameSetting;
 
     Plugins.Storage.get({ key: "darkTheme" })
-      .then(value => {
-        this._darkTheme = (value.value === "true");
-      });
+    .then(value => {
+      this._darkTheme = (value.value === "true");
+    });
+
+    let totalMinutes = this.gameState.timer1.presetMinutes;
+    let h = Math.floor(totalMinutes / 60);
+    let m = totalMinutes % 60;
+
+    this.hours = h;
+    this.minutes = m;
   }
 
-  onSelectChange(selectedValue: number) {
-    this.gameType = selectedValue;
-    this.gameState.updateClockSettings(selectedValue)
+  async onHoursChanged(selectedValue: number) {
+    this.gameState.updateClockSettings(parseInt(this.hours.toString()), parseInt(this.minutes.toString()));
+  }
+
+  async onMinutesChanged(selectedValue: number) {
+    this.gameState.updateClockSettings(parseInt(this.hours.toString()), parseInt(this.minutes.toString()));
   }
 
   dismiss() {

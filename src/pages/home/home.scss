@@ -8,6 +8,17 @@
   }
 }
 
+/* Landscape on iphone SE */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    .player-button {
+      height: 60px!important;
+    }
+}
+
 page-home {
 
     body { margin: 0; overflow: hidden; }
@@ -56,14 +67,21 @@ page-home {
       }
 
       th, td {
-        padding: .625em;
         text-align: left;
       }
 
       .players {
         td {
-          // padding-left: 30px;
-          // padding-right: 30px;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-left: 20px;
+          padding-right: 20px;
+
+          .timer-label {
+            position: absolute;
+            font-size: 2em;
+            margin-top: 0px;
+          }
 
           div.container {
             height: 100%;
@@ -98,8 +116,6 @@ page-home {
           height: 75px;
           letter-spacing: .1em;
           text-transform: uppercase;
-          padding-left: 30px;
-          padding-right: 30px;  
         }
       }
     }

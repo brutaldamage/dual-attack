@@ -77,6 +77,12 @@ page-home {
           padding-left: 20px;
           padding-right: 20px;
 
+          .timer-label {
+            position: absolute;
+            font-size: 2em;
+            margin-top: 0px;
+          }
+
           div.container {
             height: 100%;
             width: 100%;

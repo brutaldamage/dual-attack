@@ -1,6 +1,8 @@
 const BASE_TICK_TIME = 100; // .1 second
 
 export class Timer {
+    presetMinutes: number;
+
     time: number;
     isTicking: boolean;
     isOutOfTime: boolean;
@@ -17,6 +19,8 @@ export class Timer {
       this.time = 0;
       this.time += preset.minutes * 60000;
       this.time += preset.seconds * 1000;
+
+      this.presetMinutes = preset.minutes;
     }
   
     start() {

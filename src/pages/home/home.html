@@ -39,6 +39,7 @@
       <td>
         <div class="center">
           <button ion-button color="dark" class="pause active" (click)="togglePause()" *ngIf="gameStarted">{{actionLabel()}}</button>
+          <ion-label class="timer-label" *ngIf="!gameStarted">{{timer1.toString()}}</ion-label>
         </div>
       </td>
       <td colspan="3">

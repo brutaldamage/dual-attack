@@ -3,6 +3,7 @@ import { Platform } from 'ionic-angular';
 import { Plugins, AppState } from '@capacitor/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GameStateProvider } from '../providers/game-state/game-state';
+import { SettingsProvider } from './../providers/settings/settings';
 import { WebServerPlugin, WebServerRequest } from '../native/webserver';
 
 const { WebServerPlugin, App, Storage } = Plugins
@@ -14,12 +15,16 @@ import { stat } from 'fs';
 })
 export class MyApp {
 
+  selectedTheme: String;
+
   private _gameState: GameStateProvider;
 
   rootPage: any = HomePage;
 
-  constructor(platform: Platform, gameState: GameStateProvider) {
+  constructor(platform: Platform, gameState: GameStateProvider,  private settings: SettingsProvider) {
     this._gameState = gameState;
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
+
     platform.ready().then(() => {
 
       if (platform.is('cordova')) {

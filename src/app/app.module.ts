@@ -7,6 +7,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
 import { GameStateProvider } from '../providers/game-state/game-state';
+import { SettingsProvider } from '../providers/settings/settings';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { GameStateProvider } from '../providers/game-state/game-state';
   providers: [
     StatusBar,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GameStateProvider
+    GameStateProvider,
+    SettingsProvider
   ]
 })
 export class AppModule {}

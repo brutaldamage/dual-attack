@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
+import { SettingsProvider } from './../../providers/settings/settings';
 import { GameStateProvider } from '../../providers/game-state/game-state';
 import { Plugins } from '@capacitor/core';
 
@@ -17,27 +18,14 @@ import { Plugins } from '@capacitor/core';
 })
 export class SettingsPage {
 
-  private _darkTheme: Boolean;
-
-  get darkTheme(): Boolean {
-    return this._darkTheme;
-  }
-
-  set darkTheme(value: Boolean) {
-    this._darkTheme = value;
-  }
-
+  selectedTheme: String;
   gameType: number;
   hours: number;
   minutes: number;
 
-  constructor(public viewCtrl: ViewController, private gameState: GameStateProvider) {
+  constructor(public viewCtrl: ViewController, private gameState: GameStateProvider, private settings: SettingsProvider) {
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     this.gameType = gameState.currentGameSetting;
-
-    Plugins.Storage.get({ key: "darkTheme" })
-    .then(value => {
-      this._darkTheme = (value.value === "true");
-    });
 
     let totalMinutes = this.gameState.timer1.presetMinutes;
     let h = Math.floor(totalMinutes / 60);
@@ -53,6 +41,14 @@ export class SettingsPage {
 
   async onMinutesChanged(selectedValue: number) {
     this.gameState.updateClockSettings(parseInt(this.hours.toString()), parseInt(this.minutes.toString()));
+  }
+
+  toggleAppTheme() {
+    if (this.selectedTheme === 'dark-theme') {
+      this.settings.setActiveTheme('light-theme');
+    } else {
+      this.settings.setActiveTheme('dark-theme');
+    }
   }
 
   dismiss() {

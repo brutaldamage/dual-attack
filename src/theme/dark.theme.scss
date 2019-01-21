@@ -1,19 +1,19 @@
-.dark-theme.content {
-    background-color: #222222;
-    color: #ffffff;
-}
-
 .dark-theme {
 
-    .toolbar-title-md, .toolbar-title-ios {
-    color: #ffffff
-  }
+    .ion-content {
+        background-color: #222222;
+        color: #ffffff;
+    }
+
+    .toolbar-title {
+        color: #ffffff
+    }
   
-  .toolbar-background-md, .toolbar-background-ios {
+  .toolbar-background {
     background: #181818;
   }
 
-  .bar-buttons {
+  .bar-button {
       color: #ffffff;
   }
 

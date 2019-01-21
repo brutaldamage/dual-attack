@@ -5,6 +5,7 @@ import { Timer } from '../../_logic/Timer';
 import { WebServerPlugin, WebServerRequest } from '../../native/webserver';
 
 import { GameStateProvider } from '../../providers/game-state/game-state';
+import { SettingsProvider } from '../../providers/settings/settings';
 import { SettingsPage } from '../settings/settings';
 const { Modals, WebServerPlugin } = Plugins;
 
@@ -13,11 +14,6 @@ const { Modals, WebServerPlugin } = Plugins;
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  private _darkTheme: boolean;
-  get darkTheme(): Boolean {
-    return this._darkTheme;
-  }
 
   get serverSettingsAvailable(): Boolean {
     return this.platform.is('cordova');
@@ -47,13 +43,7 @@ export class HomePage {
     return this.gameState.cp2;
   }
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private platform: Platform, private gameState: GameStateProvider) {
-
-    Plugins.Storage.get({ key: "darkTheme"})
-      .then(value => {
-        this._darkTheme = (value.value === "true");
-      });
-
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private platform: Platform, private gameState: GameStateProvider, private settings: SettingsProvider) {
   }
 
   async showServerSettings() {
@@ -66,7 +56,8 @@ export class HomePage {
     })
   }
 
-  showSettings() {
+  async showSettings() {
+
     let profileModal = this.modalCtrl.create(SettingsPage);
     profileModal.present();
   }

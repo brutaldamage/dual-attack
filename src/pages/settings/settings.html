@@ -25,14 +25,14 @@
     </ion-list-header>
     <ion-item>
       <ion-label>Game Size</ion-label>
-      <ion-select [(ngModel)]="gameType" (ionChange)="onSelectChange($event)">
-        <ion-option value="0">0 points / 20 minutes</ion-option>
-        <ion-option value="1">25 points / 30 minutes</ion-option>
-        <ion-option value="2">50 points / 42 minutes</ion-option>
-        <ion-option value="3">75 points / 60 minutes</ion-option>
-        <ion-option value="4">100 points / 75 minutes</ion-option>
-        <ion-option value="5">150 points / 120 minutes</ion-option>
-        <ion-option value="6">200 points / 150 minutes</ion-option>
+      <ion-select [(ngModel)]="gameType" (ionChange)="onSelectChange($event)" interface="popover">
+        <ion-option value="0">20 minutes</ion-option>
+        <ion-option value="1">30 minutes</ion-option>
+        <ion-option value="2">42 minutes</ion-option>
+        <ion-option value="3">60 minutes</ion-option>
+        <ion-option value="4">75 minutes</ion-option>
+        <ion-option value="5">120 minutes</ion-option>
+        <ion-option value="6">150 minutes</ion-option>
       </ion-select>
     </ion-item>
     <ion-list-header>

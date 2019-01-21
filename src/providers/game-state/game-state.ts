@@ -59,44 +59,37 @@ export class GameStateProvider {
       new TimerPreset({
         name: "20 minutes",
         minutes: 20,
-        seconds: 0,
-        increment: 1
+        seconds: 0
       }),
       new TimerPreset({
         name: "30 minutes",
         minutes: 30,
-        seconds: 0,
-        increment: 1
+        seconds: 0
       }),
       new TimerPreset({
         name: "42 minutes",
         minutes: 42,
-        seconds: 0,
-        increment: 1
+        seconds: 0
       }),
       new TimerPreset({
         name: "60 minutes",
         minutes: 60,
-        seconds: 0,
-        increment: 1
+        seconds: 0
       }),
       new TimerPreset({
         name: "75 minutes",
         minutes: 75,
-        seconds: 0,
-        increment: 1
+        seconds: 0
       }),
       new TimerPreset({
         name: "120 minutes",
         minutes: 120,
-        seconds: 0,
-        increment: 1
+        seconds: 0
       }),
       new TimerPreset({
         name: "150 minutes",
         minutes: 150,
-        seconds: 0,
-        increment: 1
+        seconds: 0
       })
     ];
 
@@ -113,8 +106,8 @@ export class GameStateProvider {
 
   async resetGameState() {
     this._gameStarted = false;
-    this.timer1.stop(false);
-    this.timer2.stop(false);
+    this.timer1.stop();
+    this.timer2.stop();
     this.timer1.isOutOfTime = false;
     this.timer2.isOutOfTime = false;
     this.updateClockSettings(this.currentGameSetting);
@@ -127,11 +120,11 @@ export class GameStateProvider {
   togglePause(isForcedStop: boolean) {
     if (this.timer1.isTicking) {
       console.log("Pausing " + this.timer1.name);
-      this.timer1.stop(false);
+      this.timer1.stop();
       this.nextToMove = this.timer1;
     } else if (this.timer2.isTicking) {
       console.log("Pausing " + this.timer2.name);
-      this.timer2.stop(false);
+      this.timer2.stop();
       this.nextToMove = this.timer2;
     } else if (this.timer1.isOutOfTime || this.timer2.isOutOfTime) {
       this.resetGameState();
@@ -145,11 +138,11 @@ export class GameStateProvider {
     this._gameStarted = true;
 
     if (this.timer1.isTicking) {
-      this.timer1.stop(true);
+      this.timer1.stop();
       this.timer2.start();
     }
     else if (this.timer2.isTicking) {
-      this.timer2.stop(true);
+      this.timer2.stop();
       this.timer1.start();
     }
     else if (!this.timer1.isOutOfTime && !this.timer2.isOutOfTime) {

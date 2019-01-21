@@ -12,8 +12,9 @@
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
+  and (-webkit-device-pixel-ratio: 2) 
+  and (device-aspect-ratio: 40/71) 
+  and (orientation:landscape) {
     .player-button {
       height: 60px!important;
     }
@@ -106,6 +107,11 @@ page-home {
           height: 75%;
           font-size: 3em;
           font-weight: bolder;
+        }
+
+        .pause {
+          width: 50px!important;
+          height: 50px!important;
         }
       }
 

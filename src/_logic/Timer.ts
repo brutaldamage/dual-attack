@@ -10,6 +10,7 @@ export class Timer {
     constructor(public name: string, private preset: any) {
       this.time = 0; // milliseconds currently on the clock
       this.isTicking = false;
+      this.tickingDown = true; // used for counting beyond 0
       this.isOutOfTime = false;
   
       this.setFromPreset(preset);
@@ -36,7 +37,11 @@ export class Timer {
       if (!timer.isTicking) {
         setTimeout(() => {
           // Calling $timeout strictly to have angular update the view
-          console.log(timer.name + " stopped ticking with " + timer.time + " remaining");
+          if (timer.tickingDown) {
+            console.log(timer.name + " stopped ticking with " + timer.time + " remaining");
+          } else {
+            console.log(timer.name + " stopped ticking and is over by " + timer.time);
+          }
         });
         return;
       }
@@ -45,18 +50,23 @@ export class Timer {
       if (timer.time === 0) {
         // Set these booleans as quickly as possible to avoid possible misfire
         // of the controller's move() function
-        timer.isTicking = false;
+        // will start counting up since this has reached 0
+        timer.tickingDown = false;
         timer.isOutOfTime = true;
         setTimeout(() => {
           // Calling $timeout strictly to have angular update the view
           console.log(timer.name + " ran out of time");
         });
-        return;
       }
   
       // Tick off some time, but don't let the time drop below 0
-      if (timer.time > tickTime) {
+      if (timer.tickingDown && timer.time > tickTime) {
         timer.time -= tickTime;
+        actualTickTime = tickTime;
+      } else if (!timer.tickingDown) {
+        // ran out of time in previous call, but they are still going, timer is ticking in reverse
+        // this counts up from 0, and in the toString() function it will prepend a '-'
+        timer.time += tickTime;
         actualTickTime = tickTime;
       } else {
         // out of time, but it's possible that the player will make a move and
@@ -75,8 +85,12 @@ export class Timer {
   
     stop() {
       this.isTicking = false;
-     
-      console.log("Stopping " + this.name + " with " + this.time + " remaining");
+      
+      if (this.tickingDown) { 
+        console.log("Stopping " + this.name + " with " + this.time + " remaining");
+      } else {
+        console.log("Stopping " + this.name + " with " + this.time + " over");
+      }
     }
   
     toString() {
@@ -126,7 +140,12 @@ export class Timer {
           output += ":" + s;
         }
       }
-  
+
+      if (!this.tickingDown) {
+        //timer has reached 0 and is now counting backwards
+        output = "-" + output;
+      }
+
       return output;
     };
   

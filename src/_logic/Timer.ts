@@ -4,6 +4,7 @@ export class Timer {
     presetMinutes: number;
 
     time: number;
+    tickingDown: boolean;
     isTicking: boolean;
     isOutOfTime: boolean;
   

@@ -9,11 +9,11 @@
   <ion-navbar>
     <ion-title>Settings</ion-title>
     <ion-buttons start>
-        <button ion-button (click)="dismiss()">
-          <span ion-text color="primary" showWhen="ios">Cancel</span>
-          <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-        </button>
-      </ion-buttons>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -24,15 +24,80 @@
       Game Settings
     </ion-list-header>
     <ion-item>
-      <ion-label>Game Size</ion-label>
-      <ion-select [(ngModel)]="gameType" (ionChange)="onSelectChange($event)">
-        <ion-option value="0">0 points / 20 minutes</ion-option>
-        <ion-option value="1">25 points / 30 minutes</ion-option>
-        <ion-option value="2">50 points / 42 minutes</ion-option>
-        <ion-option value="3">75 points / 60 minutes</ion-option>
-        <ion-option value="4">100 points / 75 minutes</ion-option>
-        <ion-option value="5">150 points / 120 minutes</ion-option>
-        <ion-option value="6">200 points / 150 minutes</ion-option>
+      <ion-label>Clock Timer</ion-label>
+      <ion-select [(ngModel)]="hours" (ionChange)="onHoursChanged($event)" interface="popover">
+        <ion-option value="0">0 Hours</ion-option>
+        <ion-option value="1">1 Hour</ion-option>
+        <ion-option value="2">2 Hours</ion-option>
+        <ion-option value="3">3 Hours</ion-option>
+        <ion-option value="4">4 Hours</ion-option>
+        <ion-option value="5">5 Hours</ion-option>
+        <ion-option value="6">6 Hours</ion-option>
+        <ion-option value="7">7 Hours</ion-option>
+        <ion-option value="8">8 Hours</ion-option>
+        <ion-option value="9">9 Hours</ion-option>
+      </ion-select>
+      <ion-select [(ngModel)]="minutes" (ionChange)="onMinutesChanged($event)" interface="popover">
+        <ion-option value="0">0 Minutes</ion-option>
+        <ion-option value="1">1 Minute</ion-option>
+        <ion-option value="2">2 Minutes</ion-option>
+        <ion-option value="3">3 Minutes</ion-option>
+        <ion-option value="4">4 Minutes</ion-option>
+        <ion-option value="5">5 Minutes</ion-option>
+        <ion-option value="6">6 Minutes</ion-option>
+        <ion-option value="7">7 Minutes</ion-option>
+        <ion-option value="8">8 Minutes</ion-option>
+        <ion-option value="9">9 Minutes</ion-option>
+        <ion-option value="10">10 Minutes</ion-option>
+        <ion-option value="11">11 Minutes</ion-option>
+        <ion-option value="12">12 Minutes</ion-option>
+        <ion-option value="13">13 Minutes</ion-option>
+        <ion-option value="14">14 Minutes</ion-option>
+        <ion-option value="15">15 Minutes</ion-option>
+        <ion-option value="16">16 Minutes</ion-option>
+        <ion-option value="17">17 Minutes</ion-option>
+        <ion-option value="18">18 Minutes</ion-option>
+        <ion-option value="19">19 Minutes</ion-option>
+        <ion-option value="20">20 Minutes</ion-option>
+        <ion-option value="21">21 Minutes</ion-option>
+        <ion-option value="22">22 Minutes</ion-option>
+        <ion-option value="23">23 Minutes</ion-option>
+        <ion-option value="24">24 Minutes</ion-option>
+        <ion-option value="25">25 Minutes</ion-option>
+        <ion-option value="26">26 Minutes</ion-option>
+        <ion-option value="27">27 Minutes</ion-option>
+        <ion-option value="28">28 Minutes</ion-option>
+        <ion-option value="29">29 Minutes</ion-option>
+        <ion-option value="30">30 Minutes</ion-option>
+        <ion-option value="31">31 Minutes</ion-option>
+        <ion-option value="32">32 Minutes</ion-option>
+        <ion-option value="33">33 Minutes</ion-option>
+        <ion-option value="34">34 Minutes</ion-option>
+        <ion-option value="35">35 Minutes</ion-option>
+        <ion-option value="36">36 Minutes</ion-option>
+        <ion-option value="37">37 Minutes</ion-option>
+        <ion-option value="38">38 Minutes</ion-option>
+        <ion-option value="39">39 Minutes</ion-option>
+        <ion-option value="40">40 Minutes</ion-option>
+        <ion-option value="41">41 Minutes</ion-option>
+        <ion-option value="42">42 Minutes</ion-option>
+        <ion-option value="43">43 Minutes</ion-option>
+        <ion-option value="44">44 Minutes</ion-option>
+        <ion-option value="45">45 Minutes</ion-option>
+        <ion-option value="46">46 Minutes</ion-option>
+        <ion-option value="47">47 Minutes</ion-option>
+        <ion-option value="48">48 Minutes</ion-option>
+        <ion-option value="49">49 Minutes</ion-option>
+        <ion-option value="50">50 Minutes</ion-option>
+        <ion-option value="51">51 Minutes</ion-option>
+        <ion-option value="52">52 Minutes</ion-option>
+        <ion-option value="53">53 Minutes</ion-option>
+        <ion-option value="54">54 Minutes</ion-option>
+        <ion-option value="55">55 Minutes</ion-option>
+        <ion-option value="56">56 Minutes</ion-option>
+        <ion-option value="57">57 Minutes</ion-option>
+        <ion-option value="58">58 Minutes</ion-option>
+        <ion-option value="59">59 Minutes</ion-option>
       </ion-select>
     </ion-item>
     <ion-list-header>

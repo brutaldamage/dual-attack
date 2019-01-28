@@ -1,14 +1,14 @@
 const BASE_TICK_TIME = 100; // .1 second
 
 export class Timer {
+    presetMinutes: number;
+
     time: number;
-    increment: number;
     isTicking: boolean;
     isOutOfTime: boolean;
   
     constructor(public name: string, private preset: any) {
       this.time = 0; // milliseconds currently on the clock
-      this.increment = 0; // milliseconds to increment the clock by after every move
       this.isTicking = false;
       this.isOutOfTime = false;
   
@@ -19,7 +19,8 @@ export class Timer {
       this.time = 0;
       this.time += preset.minutes * 60000;
       this.time += preset.seconds * 1000;
-      this.increment = preset.increment * 1000;
+
+      this.presetMinutes = preset.minutes;
     }
   
     start() {
@@ -72,11 +73,9 @@ export class Timer {
       }, actualTickTime);
     }
   
-    stop(isIncrementAllowed: boolean) {
+    stop() {
       this.isTicking = false;
-      if (isIncrementAllowed) {
-        this.time += this.increment;
-      }
+     
       console.log("Stopping " + this.name + " with " + this.time + " remaining");
     }
   
@@ -134,7 +133,6 @@ export class Timer {
     getBundle() : any {
       return {
         time: this.time,
-        increment: this.increment,
         isTicking: this.isTicking,
         isOutOfTime: this.isOutOfTime
       }
@@ -144,7 +142,6 @@ export class Timer {
       console.log("restore timer bundle: ");
       console.log(JSON.stringify(bundle));
       this.time = Number(bundle.time);
-      this.increment = Number(bundle.increment);
       this.isTicking = bundle.isTicking === "true";
       this.isOutOfTime = bundle.isOutOfTime === "true";
     }

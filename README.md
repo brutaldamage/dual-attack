@@ -6,7 +6,7 @@ Dual Attack is a web and mobile application built with [Ionic Capactior](https:/
 | ----------- | ----------- |
 | Android      | [![Android Build status](https://build.appcenter.ms/v0.1/apps/38488105-b297-42de-990e-061ad67d24e3/branches/master/badge)](https://appcenter.ms)       |
 | iOS   | [![iOS Build status](https://build.appcenter.ms/v0.1/apps/abe49c68-a184-456b-82cf-d5524f3f7899/branches/master/badge)](https://appcenter.ms)        |
-| Web   | [![Web Build Status](https://travis-ci.com/brutaldamage/dual-attack.svg?branch=master)](https://travis-ci.com/brutaldamage/dual-attack)        |
+| Web   | [![Netlify Status](https://api.netlify.com/api/v1/badges/91ca6702-96d5-40c5-9d15-dcfbe91e4a6d/deploy-status)](https://app.netlify.com/sites/competent-brahmagupta-3e733d/deploys)       |
 
 ## Start Playing
 * [Google Play: Android](https://play.google.com/store/apps/details?id=blog.brutaldamage.dualattack)

@@ -27,6 +27,15 @@ public class WebServerPlugin extends Plugin {
     public NanoHTTPDWebServer nanoHTTPDWebServer;
 
     @PluginMethod()
+    public void isRunning(PluginCall call) {
+        boolean isRunning = this.nanoHTTPDWebServer != null && this.nanoHTTPDWebServer.isAlive();
+
+        JSObject json = new JSObject();
+        json.put("isRunning", isRunning);
+        call.resolve(json);
+    }
+
+    @PluginMethod()
     public void startServer(PluginCall call) {
         if(isConnectedInWifi()){
             try {

@@ -14,17 +14,21 @@ public class WebServerPlugin: CAPPlugin {
     
     // Timeout in seconds
     let TIMEOUT: Int = 60 * 3 * 1000000
-    
-    var webServer: GCDWebServer = GCDWebServer()
+    var webServer: GCDWebServer = GCDWebServer();
     var responses = SynchronizedDictionary<AnyHashable,Any?>()
     var onRequestCommand: CAPPluginCall? = nil
     
     override public init!(bridge: CAPBridge!, pluginId: String!, pluginName: String!) {
         super.init(bridge: bridge, pluginId: pluginId, pluginName: pluginName)
-        self.webServer = GCDWebServer()
+        
+        self.webServer = self.getWebServer();
         self.onRequestCommand = nil
         self.responses = SynchronizedDictionary<AnyHashable,Any?>()
         self.initHTTPRequestHandlers()
+    }
+    
+    @objc func isRunning(_ call: CAPPluginCall) {
+        call.success([ "isRunning" : self.webServer.isRunning ]);
     }
     
     @objc func getURL(_ call: CAPPluginCall) {
@@ -45,7 +49,10 @@ public class WebServerPlugin: CAPPlugin {
                 port = portValue as! Int;
             }
             
-            self.webServer.start(withPort: UInt(port), bonjourName: nil)
+            // always start server on main thread
+            DispatchQueue.main.async {
+                self.webServer.start(withPort: UInt(port), bonjourName: nil)
+            }
         }
         call.success([
             "status": "ok"
@@ -142,5 +149,9 @@ public class WebServerPlugin: CAPPlugin {
             "path": dataRequest.url.path,
             "query": dataRequest.url.query ?? ""
         ]
+    }
+    
+    func getWebServer() -> GCDWebServer {
+        return (UIApplication.shared.delegate as! AppDelegate).webServer;
     }
 }

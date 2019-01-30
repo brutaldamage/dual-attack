@@ -27,10 +27,6 @@
       <ion-label>Server Enabled</ion-label>
       <ion-toggle checked="{{serverEnabledSetting}}" (ionChange)="onToggleChanged($event)"></ion-toggle>
     </ion-item>
-    <ion-item *ngIf="serverAvailable">
-      <ion-label>Server URL</ion-label>
-      <ion-label style="text-align: right;">{{ serverAddress }}</ion-label>
-    </ion-item>
     <ion-list-header>
       Game Settings
     </ion-list-header>

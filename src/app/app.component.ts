@@ -33,7 +33,6 @@ export class MyApp {
             await Storage.set({ key: 'appState', value: JSON.stringify(bundle) });
           }
           else {
-            // gameState.togglePause(true);
             let appState = await Storage.get({ key: 'appState' });
             if (appState && appState.value) {
               this._gameState.restoreBundle(JSON.parse(appState.value));
@@ -45,11 +44,9 @@ export class MyApp {
   }
 
   private async initWebServer() {
-    await WebServerPlugin.startServer();
-
     let enabled = await Storage.get({key: "serverEnabled"});
 
-    if (enabled.value === "true") {
+    if (JSON.parse(enabled.value) == true) {
       await WebServerPlugin.startServer();
       WebServerPlugin.addListener("httpRequestReceived", (info: any) => {
         this.handleOnRequest(info);

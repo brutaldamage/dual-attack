@@ -71,7 +71,10 @@ export class SettingsPage {
       await Plugins.WebServerPlugin.stopServer();
     }
 
-    Storage.set({ key: "serverEnabled", value: checked ? "true" : "false" });
+    let kvp = { key: "serverEnabled", value: checked ? "true" : "false" };
+    console.log("Setting server enabled:");
+    console.log(kvp);
+    Storage.set(kvp);
   }
 
   dismiss() {

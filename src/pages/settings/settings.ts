@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ViewController, Platform } from 'ionic-angular';
 import { GameStateProvider } from '../../providers/game-state/game-state';
+import { WebserverProvider } from '../../providers/webserver/webserver';
 import { Plugins } from '@capacitor/core';
-const { WebServerPlugin, Storage } = Plugins
+const { Storage } = Plugins
 
 /**
  * Generated class for the SettingsPage page.
@@ -30,7 +31,7 @@ export class SettingsPage {
     // return this.platform.is('cordova');
   }
 
-  constructor(public viewCtrl: ViewController, private platform: Platform, private gameState: GameStateProvider) {
+  constructor(public viewCtrl: ViewController, private platform: Platform, private gameState: GameStateProvider, private webServer: WebserverProvider) {
     this.gameType = gameState.currentGameSetting;
 
     let totalMinutes = this.gameState.timer1.presetMinutes;
@@ -64,17 +65,18 @@ export class SettingsPage {
 
     let checked = $event.checked as boolean;
 
-    if (checked) {
-      await Plugins.WebServerPlugin.startServer();
-    }
-    else {
-      await Plugins.WebServerPlugin.stopServer();
-    }
-
     let kvp = { key: "serverEnabled", value: checked ? "true" : "false" };
     console.log("Setting server enabled:");
     console.log(kvp);
+
     Storage.set(kvp);
+
+    if (checked) {
+      await this.webServer.startWebServer();
+    }
+    else {
+      await this.webServer.stopWebServer();
+    }
   }
 
   dismiss() {

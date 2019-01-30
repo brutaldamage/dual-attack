@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Timer } from '../../_logic/Timer';
 import { TimerPreset } from '../../_logic/TimerPreset';
+import { Plugins } from '@capacitor/core';
 
 /*
   Generated class for the GameStateProvider provider.
@@ -17,6 +18,8 @@ export class GameStateProvider {
   private _turnCounter: number = 1;
   private _cp1: number = 0;
   private _cp2: number = 0;
+
+  private _timerPreset: TimerPreset;
 
   get turn(): string {
     var temp = this._turnCounter / 2;
@@ -43,8 +46,6 @@ export class GameStateProvider {
     return this._currentGameSetting;
   }
 
-  private gameSettings: TimerPreset[];
-
   public timer1: Timer;
   public timer2: Timer;
 
@@ -55,69 +56,57 @@ export class GameStateProvider {
 
   constructor() {
 
-    this.gameSettings = [
-      new TimerPreset({
-        name: "20 minutes",
-        minutes: 20,
-        seconds: 0,
-        increment: 1
-      }),
-      new TimerPreset({
-        name: "30 minutes",
-        minutes: 30,
-        seconds: 0,
-        increment: 1
-      }),
-      new TimerPreset({
-        name: "42 minutes",
-        minutes: 42,
-        seconds: 0,
-        increment: 1
-      }),
-      new TimerPreset({
-        name: "60 minutes",
-        minutes: 60,
-        seconds: 0,
-        increment: 1
-      }),
-      new TimerPreset({
-        name: "75 minutes",
-        minutes: 75,
-        seconds: 0,
-        increment: 1
-      }),
-      new TimerPreset({
-        name: "120 minutes",
-        minutes: 120,
-        seconds: 0,
-        increment: 1
-      }),
-      new TimerPreset({
-        name: "150 minutes",
-        minutes: 150,
-        seconds: 0,
-        increment: 1
-      })
-    ];
+    this._timerPreset = new TimerPreset({
+      name: "60 minutes",
+      minutes: 60,
+      seconds: 0
+    });
 
-    this.timer1 = new Timer("Timer 1", this.gameSettings[3]);
-    this.timer2 = new Timer("Timer 2", this.gameSettings[3]);
+    this.timer1 = new Timer("Timer 1", this._timerPreset);
+    this.timer2 = new Timer("Timer 2", this._timerPreset);
     this.nextToMove = this.timer1;
+
+    Plugins.Storage.get({ key: "timerPreset" })
+      .then(value => {
+        if (value.value) {
+          let totalMinutes = parseInt(value.value);
+          let h = Math.floor(totalMinutes / 60);
+          let m = totalMinutes % 60;
+
+          this.updateClockSettings(h, m);
+        }
+      });
   }
 
-  updateClockSettings(settingsIndex: number) {
-    this._currentGameSetting = settingsIndex;
-    this.timer1.setFromPreset(this.gameSettings[settingsIndex]);
-    this.timer2.setFromPreset(this.gameSettings[settingsIndex]);
+  updateClockSettings(hour: number, minutes: number) {
+
+    let totalMinutes = minutes;
+    if (hour > 0)
+      totalMinutes += (hour * 60);
+
+    this._timerPreset = new TimerPreset({
+      name: "Custom Clock",
+      minutes: totalMinutes,
+      seconds: 0
+    })
+
+    this.restoreTimerPreset();
+  }
+
+  private restoreTimerPreset() {
+    this.timer1.setFromPreset(this._timerPreset);
+    this.timer2.setFromPreset(this._timerPreset);
+
+    Plugins.Storage.set({ key: "timerPreset", value: this._timerPreset.minutes.toString() });
   }
 
   async resetGameState() {
     this._gameStarted = false;
-    this.timer1.stop(false);
-    this.timer2.stop(false);
+    this.timer1.stop();
+    this.timer2.stop();
     this.timer1.isOutOfTime = false;
     this.timer2.isOutOfTime = false;
-    this.updateClockSettings(this.currentGameSetting);
+    this.restoreTimerPreset();
     this.nextToMove = this.timer1;
     this._turnCounter = 1;
     this._cp1 = 0;
@@ -127,11 +116,11 @@ export class GameStateProvider {
   togglePause(isForcedStop: boolean) {
     if (this.timer1.isTicking) {
       console.log("Pausing " + this.timer1.name);
-      this.timer1.stop(false);
+      this.timer1.stop();
       this.nextToMove = this.timer1;
     } else if (this.timer2.isTicking) {
       console.log("Pausing " + this.timer2.name);
-      this.timer2.stop(false);
+      this.timer2.stop();
       this.nextToMove = this.timer2;
     } else if (this.timer1.isOutOfTime || this.timer2.isOutOfTime) {
       this.resetGameState();
@@ -145,11 +134,11 @@ export class GameStateProvider {
     this._gameStarted = true;
 
     if (this.timer1.isTicking) {
-      this.timer1.stop(true);
+      this.timer1.stop();
       this.timer2.start();
     }
     else if (this.timer2.isTicking) {
-      this.timer2.stop(true);
+      this.timer2.stop();
       this.timer1.start();
     }
     else if (!this.timer1.isOutOfTime && !this.timer2.isOutOfTime) {
@@ -206,9 +195,15 @@ export class GameStateProvider {
       cp1: this._cp1,
       cp2: this._cp2,
       timer1: this.timer1.getBundle(),
-      timer2: this.timer2.getBundle()
+      timer2: this.timer2.getBundle(),
+      timerPreset: {
+        name: this._timerPreset.name,
+        minutes: this._timerPreset.minutes,
+        seconds: this._timerPreset.seconds
+      }
     }
   }
+
   restoreBundle(bundle: any) {
     console.log("restore game state: ");
     console.log(JSON.stringify(bundle));
@@ -217,5 +212,7 @@ export class GameStateProvider {
     this._cp2 = bundle.cp2;
     this.timer1.restoreBundle(bundle.timer1);
     this.timer2.restoreBundle(bundle.timer2);
+
+    this._timerPreset = new TimerPreset(bundle.timerPreset);
   }
 }

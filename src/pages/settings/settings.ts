@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { ViewController, Platform } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { GameStateProvider } from '../../providers/game-state/game-state';
-import { WebServerPlugin } from '../../native/webserver';
 import { Plugins } from '@capacitor/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+const { WebServerPlugin, Storage } = Plugins
 
 /**
  * Generated class for the SettingsPage page.
@@ -20,45 +18,45 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class SettingsPage {
 
   gameType: number;
+  hours: number;
+  minutes: number;
+
   serverEnabledSetting: boolean;
 
   private _serverAddress: string;
-
-  get serverAddress(): string {
-    return this._serverAddress;
-  }
 
   get serverAvailable(): boolean {
     return true;
     // return this.platform.is('cordova');
   }
 
-  get showServerAddress(): boolean {
-    return this.serverEnabledSetting;
-  }
-
-  constructor(public viewCtrl: ViewController, private platform: Platform, private storage: Storage, private gameState: GameStateProvider) {
+  constructor(public viewCtrl: ViewController, private platform: Platform, private gameState: GameStateProvider) {
     this.gameType = gameState.currentGameSetting;
+
+    let totalMinutes = this.gameState.timer1.presetMinutes;
+    let h = Math.floor(totalMinutes / 60);
+    let m = totalMinutes % 60;
+
+    this.hours = h;
+    this.minutes = m;
 
     if (this.serverAvailable) {
       this.loadServerSettings();
     }
   }
 
-  onSelectChange(selectedValue: number) {
-    this.gameType = selectedValue;
-    this.gameState.updateClockSettings(selectedValue)
+  async onHoursChanged(selectedValue: number) {
+    this.gameState.updateClockSettings(parseInt(this.hours.toString()), parseInt(this.minutes.toString()));
+  }
+
+  async onMinutesChanged(selectedValue: number) {
+    this.gameState.updateClockSettings(parseInt(this.hours.toString()), parseInt(this.minutes.toString()));
   }
 
   async loadServerSettings() {
-    let value = await this.storage.get('serverEnabled');
-    if(value === "true") {
-      this._serverAddress = (await Plugins.WebServerPlugin.getURL()).url;
-      this.serverEnabledSetting = true;
-    }
-    else {
-      this.serverEnabledSetting = false;
-    }
+    let enabled = await Storage.get({ key: "serverEnabled" });
+
+    this.serverEnabledSetting = enabled.value === "true";
   }
 
   async onToggleChanged($event: any) {
@@ -73,10 +71,18 @@ export class SettingsPage {
       await Plugins.WebServerPlugin.stopServer();
     }
 
-    this.storage.set('serverEnabled', checked ? "true" : "false");
+    Storage.set({ key: "serverEnabled", value: checked ? "true" : "false" });
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  async onBrutalDamageLinkClicked() {
+    await Plugins.Browser.open({ url: 'http://brutaldamage.blog' });
+  }
+
+  async onGithubLinkClicked() {
+    await Plugins.Browser.open({ url: 'https://github.com/brutaldamage/dual-attack' });
   }
 }

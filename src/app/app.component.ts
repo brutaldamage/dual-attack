@@ -18,7 +18,6 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-
   constructor(platform: Platform, gameState: GameStateProvider) {
     this._gameState = gameState;
     platform.ready().then(() => {
@@ -48,9 +47,9 @@ export class MyApp {
   private async initWebServer() {
     await WebServerPlugin.startServer();
 
-    let enabled = await this.storage.get('serverEnabled') as boolean;
+    let enabled = await Storage.get({key: "serverEnabled"});
 
-    if (enabled) {
+    if (enabled.value === "true") {
       await WebServerPlugin.startServer();
       WebServerPlugin.addListener("httpRequestReceived", (info: any) => {
         this.handleOnRequest(info);

@@ -14,17 +14,21 @@ public class WebServerPlugin: CAPPlugin {
     
     // Timeout in seconds
     let TIMEOUT: Int = 60 * 3 * 1000000
-    
-    var webServer: GCDWebServer = GCDWebServer()
+    var webServer: GCDWebServer = GCDWebServer();
     var responses = SynchronizedDictionary<AnyHashable,Any?>()
     var onRequestCommand: CAPPluginCall? = nil
     
     override public init!(bridge: CAPBridge!, pluginId: String!, pluginName: String!) {
         super.init(bridge: bridge, pluginId: pluginId, pluginName: pluginName)
-        self.webServer = GCDWebServer()
+        
+        self.webServer = self.getWebServer();
         self.onRequestCommand = nil
         self.responses = SynchronizedDictionary<AnyHashable,Any?>()
         self.initHTTPRequestHandlers()
+    }
+    
+    @objc func isRunning(_ call: CAPPluginCall) {
+        call.success([ "isRunning" : self.webServer.isRunning ]);
     }
     
     @objc func getURL(_ call: CAPPluginCall) {
@@ -38,18 +42,27 @@ public class WebServerPlugin: CAPPlugin {
     }
     
     @objc func startServer(_ call: CAPPluginCall) {
-        
-        var port = 8080
-        let portValue = call.getInt("port")
-        if portValue != nil {
-            port = portValue as! Int;
+        if self.webServer != nil || !self.webServer.isRunning {
+            var port = 8080
+            let portValue = call.getInt("port")
+            if portValue != nil {
+                port = portValue as! Int;
+            }
+            
+            // always start server on main thread
+            DispatchQueue.main.async {
+                self.webServer.start(withPort: UInt(port), bonjourName: nil)
+            }
         }
-        
-        self.webServer.start(withPort: UInt(port), bonjourName: nil)
-        
         call.success([
             "status": "ok"
             ])
+    }
+    
+     @objc func stopServer(_ call: CAPPluginCall) {
+        if self.webServer != nil && self.webServer.isRunning {
+            self.webServer.stop();
+        }
     }
     
     @objc func sendResponse(_ call: CAPPluginCall) {
@@ -68,14 +81,6 @@ public class WebServerPlugin: CAPPlugin {
     }
     
     func initHTTPRequestHandlers() {
-        
-//        self.webServer.addHandler(
-//            match: {
-//            (requestMethod, requestURL, requestHeaders, urlPath, urlQuery) -> GCDWebServerRequest? in
-//            return GCDWebServerDataRequest(method: requestMethod, url: requestURL, headers: requestHeaders, path: urlPath, query: urlQuery)
-//        }) { (<#GCDWebServerRequest?#>, <#GCDWebServerCompletionBlock?#>) in
-//            <#code#>
-//        }
         
         self.webServer.addHandler(
             match: {
@@ -144,5 +149,9 @@ public class WebServerPlugin: CAPPlugin {
             "path": dataRequest.url.path,
             "query": dataRequest.url.query ?? ""
         ]
+    }
+    
+    func getWebServer() -> GCDWebServer {
+        return (UIApplication.shared.delegate as! AppDelegate).webServer;
     }
 }

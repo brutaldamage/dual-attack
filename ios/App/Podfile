@@ -1,16 +1,19 @@
 platform :ios, '11.0'
 use_frameworks!
 
-target 'App' do
-  # Add your Pods here
-  pod 'GCDWebServer', "~> 3.0"
-  
-  # Use the following line to use App Center Analytics and Crashes.
-  pod 'AppCenter'
-
+def capacitor_pods
   # Automatic Capacitor Pod dependencies, do not delete
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
   
   # Do not delete
+end
+
+target 'App' do
+  capacitor_pods
+  # Add your Pods here
+  pod 'GCDWebServer', "~> 3.0"
+  
+  # Use the following line to use App Center Analytics and Crashes.
+  pod 'AppCenter'
 end

@@ -23,12 +23,12 @@ export class SettingsPage {
   minutes: number;
 
   serverEnabledSetting: boolean;
+  stylesEnabledSetting: boolean;
 
   private _serverAddress: string;
 
   get serverAvailable(): boolean {
-    return true;
-    // return this.platform.is('cordova');
+    return this.platform.is('cordova');
   }
 
   constructor(public viewCtrl: ViewController, private platform: Platform, private gameState: GameStateProvider, private webServer: WebserverProvider) {
@@ -56,8 +56,10 @@ export class SettingsPage {
 
   async loadServerSettings() {
     let enabled = await Storage.get({ key: "serverEnabled" });
+    let styles = await Storage.get({ key: "fancyStylesEnabled" });
 
     this.serverEnabledSetting = enabled.value === "true";
+    this.stylesEnabledSetting = styles.value === "true";
   }
 
   async onToggleChanged($event: any) {
@@ -77,6 +79,12 @@ export class SettingsPage {
     else {
       await this.webServer.stopWebServer();
     }
+  }
+
+  async onStylesToggleChanged($event: any) {
+    let checked = $event.checked as boolean;
+    let kvp = { key: "fancyStylesEnabled", value: checked ? "true" : "false" };
+    Storage.set(kvp);
   }
 
   dismiss() {

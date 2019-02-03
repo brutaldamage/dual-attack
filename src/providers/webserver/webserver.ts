@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { GameStateProvider } from '../game-state/game-state'
+import { HttpClient } from '@angular/common/http';
 import { WebServerPlugin, WebServerRequest } from '../../native/webserver';
 const { WebServerPlugin, App, Storage } = Plugins
 /*
@@ -13,7 +14,7 @@ const { WebServerPlugin, App, Storage } = Plugins
 export class WebserverProvider {
   private _gameState: GameStateProvider;
 
-  constructor(private gameState: GameStateProvider) {
+  constructor(private gameState: GameStateProvider, private http: HttpClient) {
     this._gameState = gameState;
   }
 
@@ -42,7 +43,7 @@ export class WebserverProvider {
     return false;
   }
 
-  private handleOnRequest(data: WebServerRequest) {
+  private async handleOnRequest(data: WebServerRequest) {
     if (data.path.includes("data")) {
       var json = {
         timer1: this._gameState.timer1.toString(),
@@ -64,10 +65,11 @@ export class WebserverProvider {
       });
     }
     else {
+      let htmlContent = await this.getPageHtml();
       WebServerPlugin.sendResponse({
         requestId: data.requestId,
         status: 200,
-        body: this.getPageHtml(),
+        body: htmlContent,
         headers: {
           'Content-Type': 'text/html'
         },
@@ -75,68 +77,18 @@ export class WebserverProvider {
     }
   }
 
-  private getPageHtml(): string {
-    return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-      </head>
-      <body>
-          <div id="turnInfo">
-              <h2 id="turnInfoHeader">
-                  <span class="turnLabel">Turn:</span>
-                  <span id="turn" class="turnText"></span>
-              </h2>
-          </div>
-          <div id="leftPlayerInfo">
-              <h2 id="leftPlayerHeader">Left Player</h2>
-              <p class="timeInfo">
-                  <span class="timeLabel">Time:</span>
-                  <span id="leftPlayerTime" class="timeText"></span>
-              </p>
-              <p class="cpInfo">
-                  <span class="cpLabel">CP:</span>
-                  <span id="leftPlayerCP" class="cpText">0</span>
-              </p>
-          </div>
-          <div id="rightPlayerInfo">
-              <h2 id="rightPlayerHeader">Right Player</h2>
-              <p class="timeInfo">
-                  <span class="timeLabel">Time:</span>
-                  <span id="rightPlayerTime" class="timeText"></span>
-              </p>
-              <p class="cpInfo">
-                  <span class="cpLabel">CP:</span>
-                  <span id="rightPlayerCP" class="cpText">0</span>
-              </p>
-          </div>
-      </body>
-      <script>
-      var hostname = window.location.hostname;
-          function keepAlive() {
-              var timeout = 500;
+  private async getPageHtml(): Promise<string> {
 
-              $.getJSON(
-                  "http://" + hostname + ":8080/data",
-                  function (json) {
-                      console.log(json);
+    let fancyStyles = await Storage.get({ key: "fancyStylesEnabled" });
 
-                      document.getElementById("turn").innerText = json["score"]["turn"];
+    let stylesPage = fancyStyles.value === "true" ? "assets/static/server2.html" : "assets/static/server1.html";
 
-                      document.getElementById("leftPlayerTime").innerText = json["timer1"];
-                      document.getElementById("rightPlayerTime").innerText = json["timer2"];
+    let httpResult = await this.http
+      .get(stylesPage, { responseType: "text" })
+      .toPromise();
 
-                      document.getElementById("leftPlayerCP").innerText = json["score"]["cp1"];
-                      document.getElementById("rightPlayerCP").innerText = json["score"]["cp2"];
-                  }
-              );
+    let httpString = httpResult.toString();
 
-              timerId = setTimeout(keepAlive, timeout);
-          };
-          keepAlive();
-      </script>
-    </html>
-    `;
+    return httpString;
   }
 }

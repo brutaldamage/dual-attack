@@ -22,9 +22,18 @@ import static android.content.Context.WIFI_SERVICE;
 @NativePlugin()
 public class WebServerPlugin extends Plugin {
 
-    private int _port;
+    private int _port = 8080;
     public HashMap<String, Object> responses = new HashMap<String, Object>();
     public NanoHTTPDWebServer nanoHTTPDWebServer;
+
+    @PluginMethod()
+    public void isRunning(PluginCall call) {
+        boolean isRunning = this.nanoHTTPDWebServer != null && this.nanoHTTPDWebServer.isAlive();
+
+        JSObject json = new JSObject();
+        json.put("isRunning", isRunning);
+        call.resolve(json);
+    }
 
     @PluginMethod()
     public void startServer(PluginCall call) {
@@ -34,8 +43,10 @@ public class WebServerPlugin extends Plugin {
                     _port = call.getInt("port", 8080);
 
                     this.nanoHTTPDWebServer = new NanoHTTPDWebServer(_port, this);
-                    this.nanoHTTPDWebServer.start();
+                }
 
+                if(!this.nanoHTTPDWebServer.isAlive()) {
+                    this.nanoHTTPDWebServer.start();
                     Log.d(
                             this.getClass().getName(),
                             "Server is running on: " +
@@ -67,10 +78,9 @@ public class WebServerPlugin extends Plugin {
 
     @PluginMethod()
     public void stopServer(PluginCall call) {
-        if (this.nanoHTTPDWebServer != null) {
+        if (this.nanoHTTPDWebServer != null && this.nanoHTTPDWebServer.isAlive()) {
             this.nanoHTTPDWebServer.stop();
         }
-        call.resolve();
     }
 
     @PluginMethod()

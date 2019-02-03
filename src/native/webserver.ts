@@ -13,6 +13,10 @@ export interface WebServerUrl {
     url: string;
 }
 
+export interface WebServerRunningResult {
+    isRunning: boolean;
+}
+
 export interface WebServerRequest {
     requestId: string;
     body : string;
@@ -30,7 +34,9 @@ export interface WebServerResponse {
 }
 
 export interface WebServerPlugin extends Plugin {
+    isRunning(): Promise<WebServerRunningResult>;
     getURL(): Promise<WebServerUrl>;
     startServer(): Promise<any>;
+    stopServer(): Promise<any>;
     sendResponse(response: WebServerResponse);
 }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, Platform } from 'ionic-angular';
 import { GameStateProvider } from '../../providers/game-state/game-state';
+import { WebserverProvider } from '../../providers/webserver/webserver';
 import { Plugins } from '@capacitor/core';
-
+const { Storage } = Plugins
 
 /**
  * Generated class for the SettingsPage page.
@@ -21,7 +22,16 @@ export class SettingsPage {
   hours: number;
   minutes: number;
 
-  constructor(public viewCtrl: ViewController, private gameState: GameStateProvider) {
+  serverEnabledSetting: boolean;
+
+  private _serverAddress: string;
+
+  get serverAvailable(): boolean {
+    return true;
+    // return this.platform.is('cordova');
+  }
+
+  constructor(public viewCtrl: ViewController, private platform: Platform, private gameState: GameStateProvider, private webServer: WebserverProvider) {
     this.gameType = gameState.currentGameSetting;
 
     let totalMinutes = this.gameState.timer1.presetMinutes;
@@ -30,6 +40,10 @@ export class SettingsPage {
 
     this.hours = h;
     this.minutes = m;
+
+    if (this.serverAvailable) {
+      this.loadServerSettings();
+    }
   }
 
   async onHoursChanged(selectedValue: number) {
@@ -38,6 +52,31 @@ export class SettingsPage {
 
   async onMinutesChanged(selectedValue: number) {
     this.gameState.updateClockSettings(parseInt(this.hours.toString()), parseInt(this.minutes.toString()));
+  }
+
+  async loadServerSettings() {
+    let enabled = await Storage.get({ key: "serverEnabled" });
+
+    this.serverEnabledSetting = enabled.value === "true";
+  }
+
+  async onToggleChanged($event: any) {
+    console.log($event)
+
+    let checked = $event.checked as boolean;
+
+    let kvp = { key: "serverEnabled", value: checked ? "true" : "false" };
+    console.log("Setting server enabled:");
+    console.log(kvp);
+
+    Storage.set(kvp);
+
+    if (checked) {
+      await this.webServer.startWebServer();
+    }
+    else {
+      await this.webServer.stopWebServer();
+    }
   }
 
   dismiss() {

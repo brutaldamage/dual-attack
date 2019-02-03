@@ -27,10 +27,6 @@
       <ion-label>Server Enabled</ion-label>
       <ion-toggle checked="{{serverEnabledSetting}}" (ionChange)="onToggleChanged($event)"></ion-toggle>
     </ion-item>
-    <ion-item *ngIf="serverAvailable">
-      <ion-label>Use Fancy Styles</ion-label>
-      <ion-toggle checked="{{stylesEnabledSetting}}" (ionChange)="onStylesToggleChanged($event)"></ion-toggle>
-    </ion-item>
     <ion-list-header>
       Game Settings
     </ion-list-header>

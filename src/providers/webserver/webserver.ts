@@ -78,13 +78,8 @@ export class WebserverProvider {
   }
 
   private async getPageHtml(): Promise<string> {
-
-    let fancyStyles = await Storage.get({ key: "fancyStylesEnabled" });
-
-    let stylesPage = fancyStyles.value === "true" ? "assets/static/server2.html" : "assets/static/server1.html";
-
     let httpResult = await this.http
-      .get(stylesPage, { responseType: "text" })
+      .get("assets/static/server.html", { responseType: "text" })
       .toPromise();
 
     let httpString = httpResult.toString();

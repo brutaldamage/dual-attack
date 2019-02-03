@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
-		3A477EB221F01B720038BEDC /* AppCenterCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */; };
-		3AE584F921AA4EA400350426 /* WebServerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584F821AA4EA400350426 /* WebServerPlugin.swift */; };
-		3AE584FD21AA4EE600350426 /* SynchronizedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584FB21AA4EE600350426 /* SynchronizedDictionary.swift */; };
-		3AE584FE21AA4EE600350426 /* WebServerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE584FC21AA4EE600350426 /* WebServerPlugin.m */; };
+		3ABD89502206A11500C1BF2A /* WebServer in Resources */ = {isa = PBXBuildFile; fileRef = 3ABD894F2206A11500C1BF2A /* WebServer */; };
+		3ABD89522206A12700C1BF2A /* AppCenterCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD89512206A12700C1BF2A /* AppCenterCredentials.swift */; };
+		3ABD89552206A18200C1BF2A /* create-appcenter-credentials.rb in Resources */ = {isa = PBXBuildFile; fileRef = 3ABD89542206A18100C1BF2A /* create-appcenter-credentials.rb */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
@@ -23,11 +22,9 @@
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
-		3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCenterCredentials.swift; sourceTree = "<group>"; };
-		3AE584F821AA4EA400350426 /* WebServerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServerPlugin.swift; sourceTree = "<group>"; };
-		3AE584FA21AA4EE600350426 /* App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Bridging-Header.h"; sourceTree = "<group>"; };
-		3AE584FB21AA4EE600350426 /* SynchronizedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedDictionary.swift; sourceTree = "<group>"; };
-		3AE584FC21AA4EE600350426 /* WebServerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServerPlugin.m; sourceTree = "<group>"; };
+		3ABD894F2206A11500C1BF2A /* WebServer */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebServer; sourceTree = "<group>"; };
+		3ABD89512206A12700C1BF2A /* AppCenterCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCenterCredentials.swift; sourceTree = "<group>"; };
+		3ABD89542206A18100C1BF2A /* create-appcenter-credentials.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = "create-appcenter-credentials.rb"; sourceTree = SOURCE_ROOT; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,17 +58,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3AE584F721AA4E6300350426 /* WebServer */ = {
-			isa = PBXGroup;
-			children = (
-				3AE584FA21AA4EE600350426 /* App-Bridging-Header.h */,
-				3AE584FB21AA4EE600350426 /* SynchronizedDictionary.swift */,
-				3AE584FC21AA4EE600350426 /* WebServerPlugin.m */,
-				3AE584F821AA4EA400350426 /* WebServerPlugin.swift */,
-			);
-			path = WebServer;
-			sourceTree = "<group>";
-		};
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
@@ -93,7 +79,9 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
-				3AE584F721AA4E6300350426 /* WebServer */,
+				3ABD89542206A18100C1BF2A /* create-appcenter-credentials.rb */,
+				3ABD89512206A12700C1BF2A /* AppCenterCredentials.swift */,
+				3ABD894F2206A11500C1BF2A /* WebServer */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
@@ -102,7 +90,6 @@
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
-				3A477EB121F01B720038BEDC /* AppCenterCredentials.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -124,7 +111,7 @@
 			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "App" */;
 			buildPhases = (
 				6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */,
-				3A31F3E321EEF594008137FE /* ShellScript */,
+				3ABD89532206A16400C1BF2A /* ShellScript */,
 				504EC3001FED79650016851F /* Sources */,
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
@@ -146,11 +133,10 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1010;
 				TargetAttributes = {
 					504EC3031FED79650016851F = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -181,16 +167,18 @@
 				504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */,
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
+				3ABD89502206A11500C1BF2A /* WebServer in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
+				3ABD89552206A18200C1BF2A /* create-appcenter-credentials.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A31F3E321EEF594008137FE /* ShellScript */ = {
+		3ABD89532206A16400C1BF2A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -205,7 +193,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./create-appcenter-credentials.rb\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./create-appcenter-credentials.rb\n";
 		};
 		6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -254,11 +242,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE584FE21AA4EE600350426 /* WebServerPlugin.m in Sources */,
-				3AE584F921AA4EA400350426 /* WebServerPlugin.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
-				3AE584FD21AA4EE600350426 /* SynchronizedDictionary.swift in Sources */,
-				3A477EB221F01B720038BEDC /* AppCenterCredentials.swift in Sources */,
+				3ABD89522206A12700C1BF2A /* AppCenterCredentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +385,6 @@
 			baseConfigurationReference = FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -409,9 +393,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = blog.brutaldamage.dualattack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG USE_PUSH";
-				SWIFT_OBJC_BRIDGING_HEADER = "App/WebServer/App-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -421,7 +403,6 @@
 			baseConfigurationReference = AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -429,8 +410,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = blog.brutaldamage.dualattack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = USE_PUSH;
-				SWIFT_OBJC_BRIDGING_HEADER = "App/WebServer/App-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

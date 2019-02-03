@@ -20,6 +20,13 @@
 
 <ion-content padding>
   <ion-list>
+    <ion-list-header *ngIf="serverAvailable">
+      Web Server Settings
+    </ion-list-header>
+    <ion-item *ngIf="serverAvailable">
+      <ion-label>Server Enabled</ion-label>
+      <ion-toggle checked="{{serverEnabledSetting}}" (ionChange)="onToggleChanged($event)"></ion-toggle>
+    </ion-item>
     <ion-list-header>
       Game Settings
     </ion-list-header>

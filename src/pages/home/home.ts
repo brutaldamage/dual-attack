@@ -55,13 +55,22 @@ export class HomePage {
   }
 
   async showServerSettings() {
-    var url = await WebServerPlugin.getURL();
-    console.log(url);
 
-    await Modals.alert({
-      title: "Web Server Url",
-      message: url.url
-    })
+    if ((await WebServerPlugin.isRunning()).isRunning) {
+      var url = await WebServerPlugin.getURL();
+      console.log(url);
+
+      await Modals.alert({
+        title: "Web Server Url",
+        message: url.url
+      })
+    }
+    else {
+      await Modals.alert({
+        title: "Web Server",
+        message: "The web server is not currently runing. Please enable it in app settings."
+      })
+    }
   }
 
   showSettings() {

@@ -25,12 +25,24 @@ steps:
   inputs: 
     projectDirectory: $(system.defaultWorkingDirectory)/ios/app
 
+- task: InstallAppleProvisioningProfile@1
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'Dual_Attack__Ad_Hoc.mobileprovision'
+    removeProfile: true
+
+- task: InstallAppleCertificate@2
+  inputs:
+    certSecureFile: 'distribution.p12'
+    certPwd: '$(apple_cert_pwd)'
+    deleteCert: true
+
 - task: Xcode@5
   inputs:
     scheme: 'App'
     sdk: 'iphoneos'
     configuration: 'Release'
-    xcodeVersion: '10'
+    xcodeVersion: '10.1'
     xcWorkspacePath: '$(system.defaultWorkingDirectory)/ios/App/App.xcworkspace'
     packageApp: true
     workingDirectory: 'iOS'

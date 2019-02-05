@@ -31,6 +31,6 @@ steps:
     sdk: 'iphoneos'
     configuration: 'Release'
     xcodeVersion: 'default'
-    xcWorkspacePath: 'App/App.xcworkspace'
+    xcWorkspacePath: '$(system.defaultWorkingDirectory)/ios/App/App.xcworkspace'
     packageApp: true
     workingDirectory: 'iOS'

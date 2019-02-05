@@ -32,11 +32,39 @@ If you launch that url in a web browser you'll get a web page that displays the 
 #### via the web
 We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
 
-## want to contribute? 
+## Customizing
+We use dual attack with OBS by overlaying the web page served from the web server on the camera feed. But, since OBS is really flexible, you can adjust as necessary. The web server has 2 endpoints available, one to return the game state via a JSON response, and one to return the simple web pages. Those urls are as follows:
+
+* http://{IPAddress}:8080
+
+The root URL will serve up the web page that contains a basic output of the current game state. It will refresh every second to display any changes to game state.
+
+* http://{IPAddress}:8080/data
+
+The data endpoint will expose a JSON object that includes the current game state. If you continusoully refresh this endpoint, it will stay current with the current data of the game. 
+If you want to customize the data overlay beyond the webpage, the web server exposes the game state as a JSON object. Hit http://{IPAddress}:8080/data in a web browser or with your scripting language of choice to get a JSON object containing all the game data.
+
+### Using CSS
+
+We use the following CSS in our OBS setup if you want to use it as a starting point:
+
+```
+body { overflow: hidden; color: #FFFFFF; }
+
+.flex-container>div { background: none; font-size: 45px; margin: 10px 40px;  }
+```
+
+### Using Python
+
+OBS supports loading text files. I believe other camera overlay software has the same functionality. If you'd rather use a text file over manipulating CSS on a web page, [LargeGeek](https://github.com/LargeGeek) created this python script to do a file import with Dual Attack and OBS: [https://pastebin.com/yh4FqWbA](https://pastebin.com/yh4FqWbA).
+
+## Contributing?
+
+Please review the [contributing guide](https://github.com/brutaldamage/dual-attack/blob/master/CONTRIBUTING.md) before making changes and issuing PRs to Dual Attack.
 
 ### getting started
 
-*  clone the repository
+* clone the repository
 
 * follow the capacitor docs to get dependencies installed for iOS & Android
 [https://capacitor.ionicframework.com/docs/getting-started/dependencies/](https://capacitor.ionicframework.com/docs/getting-started/dependencies/)
@@ -93,6 +121,7 @@ The UI of this app is based on the work of [Misha Bosin's Web chess clock](https
 ### Contributors
 * Drew Frisk: [keannan5390](https://github.com/keannan5390)
 * Lance Aeby: [lanceaeby](https://github.com/lanceaeby)
+* LargeGeek: [LargeGeek](https://github.com/LargeGeek)
 
 ### 3rd Party
 * Icon designed by [Freepik](https://www.flaticon.com/authors/freepik) from **Flaticon**.

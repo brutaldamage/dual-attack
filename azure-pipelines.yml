@@ -42,8 +42,9 @@ steps:
     scheme: 'App'
     sdk: 'iphoneos'
     configuration: 'Release'
-    xcodeVersion: '10'
+    xcodeVersion: 'specifyPath'
     xcWorkspacePath: '$(system.defaultWorkingDirectory)/ios/App/App.xcworkspace'
     xcodeDeveloperDir: '/Applications/Xcode_10.1.app/Contents/Developer'
     packageApp: true
     workingDirectory: 'iOS'
+    signingOption: auto

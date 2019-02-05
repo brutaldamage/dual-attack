@@ -6,12 +6,12 @@ Dual Attack is a web and mobile application built with [Ionic Capactior](https:/
 | ----------- | ----------- |
 | Android      | [![Android Build status](https://build.appcenter.ms/v0.1/apps/38488105-b297-42de-990e-061ad67d24e3/branches/master/badge)](https://appcenter.ms)       |
 | iOS   | [![iOS Build status](https://build.appcenter.ms/v0.1/apps/abe49c68-a184-456b-82cf-d5524f3f7899/branches/master/badge)](https://appcenter.ms)        |
-| Web   | [![Web Build Status](https://travis-ci.com/brutaldamage/dual-attack.svg?branch=master)](https://travis-ci.com/brutaldamage/dual-attack)        |
+| Web   | [![Netlify Status](https://api.netlify.com/api/v1/badges/91ca6702-96d5-40c5-9d15-dcfbe91e4a6d/deploy-status)](https://app.netlify.com/sites/competent-brahmagupta-3e733d/deploys)       |
 
 ## Start Playing
-* [On Android](https://install.appcenter.ms/orgs/brutaldamage/apps/dual-attack-1/distribution_groups/public)
-* [On the Web](https://dual-attack.app)
-* On iOS (coming soon)
+* [Google Play: Android](https://play.google.com/store/apps/details?id=blog.brutaldamage.dualattack)
+* [App Store: iOS](https://itunes.apple.com/us/app/dual-attack/id1449425043?ls=1&mt=8)
+* [Web: dual-attack.app](https://dual-attack.app)
 
 ## What Is It?
 We ([Brutal Damage](https://brutaldamage.blog)) wanted a way to display live updates of clock, turn, and CP info for our Warmachine & Hordes Youtube streams. We had trouble finding something that did what we wanted, so we decided to build what we couldn't find.
@@ -24,12 +24,12 @@ Our meta has a few developers in it, but we all of slightly different skill sets
 
 The UI is pretty simple, its a single UI with some configurable options (mostly just time on the clock). It includes some presets for default times for the standard tournament game sizes.
 
-#### via the native mobile apps
-If you run the android or iOS app, when it starts, the app will create an interal web server. This web server can be accessed from any device on the same network as the phone/tabelt running the app. Clicking the "internet" button in the top right nav bar will display the IP address the server can be accessed from.
+#### Android & iOS App
+If you run the Android or iOS app, when it starts, the app will create an interal web server. This web server can be accessed from any device on the same network as the device running the app. Clicking the "internet" button in the top right nav bar will display the IP address the server can be accessed from.
 
-If you launch that url in a web browser you'll get a web page that displays the information hit the root of that url. That web page will display the game stats from the mobile app in realtime. How cool is that!?! This allows the game stats to easily be displayed on an external device, such as a TV. For us, we open the url in [OBS](https://obsproject.com/) and put some custom CSS over the top of it so it can be displayed on our streams and recordings.
+If you launch that url in a web browser you'll get a web page that displays the game stats from the mobile app in realtime. How cool is that!?! This allows the game stats to easily be displayed on an external device, such as a TV or monitor. For us, we open the url in [OBS](https://obsproject.com/) and put some custom CSS over the top of it so it can be displayed on our streams and recordings. See the customizing section below for info on modifying the default output.
 
-#### via the web
+#### Web App
 We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
 
 ## Customizing
@@ -102,7 +102,7 @@ Please review the [contributing guide](https://github.com/brutaldamage/dual-atta
 
 * write some code
 
-* create a pull request
+* create a pull request, see the contributing guide for 
 
 ## publishing the app
 

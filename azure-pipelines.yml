@@ -30,7 +30,7 @@ steps:
     scheme: 'App'
     sdk: 'iphoneos'
     configuration: 'Release'
-    xcodeVersion: 'default'
+    xcodeVersion: '10'
     xcWorkspacePath: '$(system.defaultWorkingDirectory)/ios/App/App.xcworkspace'
     packageApp: true
     workingDirectory: 'iOS'

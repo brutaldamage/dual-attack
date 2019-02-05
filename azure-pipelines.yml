@@ -1,0 +1,36 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '8.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+
+- task: CocoaPods@0
+  displayName: 'pod install'
+  inputs: 
+    projectDirectory: $(system.defaultWorkingDirectory)/ios/app
+
+- task: Xcode@5
+  inputs:
+    scheme: 'App'
+    sdk: 'iphoneos'
+    configuration: 'Release'
+    xcodeVersion: 'default'
+    xcWorkspacePath: 'App/App.xcworkspace'
+    packageApp: true
+    workingDirectory: 'iOS'

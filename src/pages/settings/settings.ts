@@ -23,12 +23,10 @@ export class SettingsPage {
   minutes: number;
 
   serverEnabledSetting: boolean;
-
-  private _serverAddress: string;
+  stylesEnabledSetting: boolean;
 
   get serverAvailable(): boolean {
-    return true;
-    // return this.platform.is('cordova');
+    return this.platform.is('cordova');
   }
 
   constructor(public viewCtrl: ViewController, private platform: Platform, private gameState: GameStateProvider, private webServer: WebserverProvider) {

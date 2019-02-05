@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .flex-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .flex-container>div {
+            background-color: #f1f1f1;
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div><span id="leftPlayerCP" class="cpText">0</span></div>
+        <div><span id="leftPlayerTime" class="timeText">1:00:00</span></div>
+        <div><span id="turn" class="turnText">1A</span></div>
+        <div><span id="rightPlayerTime" class="timeText">1:00:00</span></div>
+        <div><span id="rightPlayerCP" class="cpText">0</span></div>
+    </div>
+    <script>
+        var hostname = window.location.hostname;
+        function keepAlive() {
+            var timeout = 500;
+
+            $.getJSON(
+                "http://" + hostname + ":8080/data",
+                function (json) {
+                    console.log(json);
+
+                    document.getElementById("turn").innerText = json["score"]["turn"];
+
+                    document.getElementById("leftPlayerTime").innerText = json["timer1"];
+                    document.getElementById("rightPlayerTime").innerText = json["timer2"];
+
+                    document.getElementById("leftPlayerCP").innerText = json["score"]["cp1"];
+                    document.getElementById("rightPlayerCP").innerText = json["score"]["cp2"];
+                }
+            );
+
+            timerId = setTimeout(keepAlive, timeout);
+        };
+        keepAlive();
+    </script>
+
+</body>
+
+</html>

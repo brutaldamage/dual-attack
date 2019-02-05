@@ -28,7 +28,7 @@ steps:
 - task: InstallAppleCertificate@2
   inputs:
     certSecureFile: 'distribution.p12'
-    certPwd: $(apple_cert_pwd)
+    certPwd: '$(apple_cert_pwd)'
     deleteCert: true
 
 - task: InstallAppleProvisioningProfile@1

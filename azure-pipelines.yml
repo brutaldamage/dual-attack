@@ -47,6 +47,5 @@ steps:
     xcodeDeveloperDir: '/Applications/Xcode_10.1.app/Contents/Developer'
     packageApp: true
     workingDirectory: 'iOS'
-    signingOption: manual
-    signingIdentity: '$(apple_signing_identity)'
-    provisioningProfileUuid: '$(apple_provisioning_id)'
+    signingOption: auto
+    teamId: '$(apple_team_id)'

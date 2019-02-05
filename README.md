@@ -49,22 +49,9 @@ If you want to customize the data overlay beyond the webpage, the web server exp
 We use the following CSS in our OBS setup if you want to use it as a starting point:
 
 ```
-body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; color: #FFFFFF; font-size: 40px; }
+body { overflow: hidden; color: #FFFFFF; }
 
-.turnLabel { display: none; }
-
-#leftPlayerHeader, #rightPlayerHeader, .timeLabel, .cpLabel { display: none; }
-
-#leftPlayerInfo { display: inline-flex; flex-direction: row-reverse; }
-
-#rightPlayerInfo { display: inline-flex; }
-
-#leftPlayerTime { margin-left: 90px; }
-#leftPlayerCP { margin-left: 40px; }
-#rightPlayerTime { margin-left: 240px; }
-#rightPlayerCP { margin-left: 100px; }
-
-#turnInfo { position: absolute; left: 334px; top: 0; font-size: 30px; }
+.flex-container>div { background: none; font-size: 45px; margin: 10px 40px;  }
 ```
 
 ### Using Python
@@ -134,6 +121,7 @@ The UI of this app is based on the work of [Misha Bosin's Web chess clock](https
 ### Contributors
 * Drew Frisk: [keannan5390](https://github.com/keannan5390)
 * Lance Aeby: [lanceaeby](https://github.com/lanceaeby)
+* LargeGeek: [LargeGeek](https://github.com/LargeGeek)
 
 ### 3rd Party
 * Icon designed by [Freepik](https://www.flaticon.com/authors/freepik) from **Flaticon**.

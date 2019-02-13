@@ -18,10 +18,6 @@ This code base is meant to run and be deployed to the web, android & iOS. If you
 
 The mobile app side of this project is built with Ionic Capacitor. Refer to the getting started section of the readme to get up and running with capacitor.
 
-**When creating a PR, issue it against the vNext branch**
+**Create a PR when you've got something good!**
 
-This project is setup with CI/CD using Netlify and Microsoft App Center. Due to the app review times associated with Google & Apple, continuous integration and deployment is a little tricky. We can't bombard the app store submission queue everytime we make a change to master.
-
-To get around this, we merge PRs into a release branch and when we're read to make a release we'll cherry-pick the PR commits into a version specific PR. There is a long running *vNext* release branch, please issue all PRs against this branch.
-
-If an PR is issued against master we will close it and ask for a new one to be issued against the correct branch.
+This project is setup with CI/CD using Netlify and Microsoft Azure Devops. Both the mobile apps and the web app will build for PRs. All builds must be successful for a PR to be accepted. Once merged into master your contributions will be deployed with the next release. 

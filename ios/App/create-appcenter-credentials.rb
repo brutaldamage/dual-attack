@@ -2,7 +2,7 @@
 
 file_content = <<-CREDS_FILE_STRING
 struct AppCenterCredentials {
-    static let appSecret = "#{ENV['APP_CENTER_SECRET']}"
+    static let appSecret = "#{ENV['APP_CENTER_SECRET_IOS']}"
 }
 CREDS_FILE_STRING
 

@@ -169,7 +169,7 @@ export class GameStateProvider {
 
   incrementCP(playerIndex: number) {
 
-    if (this._turnCounter < 4)
+    if (this._turnCounter < 3)
       return;
 
     if (playerIndex == 0)
@@ -180,7 +180,7 @@ export class GameStateProvider {
 
   decrementCP(playerIndex: number) {
 
-    if (this._turnCounter < 4)
+    if (this._turnCounter < 3)
       return;
 
     if (playerIndex == 0 && this._cp1 > 0)

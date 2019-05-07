@@ -93,6 +93,16 @@ export class GameStateProvider {
     this.restoreTimerPreset();
   }
 
+  updateTimer1Time(newValue: TimerPreset) {
+    this.timer1.stop();
+    this.timer1.setFromPreset(newValue);
+  }
+
+  updateTimer2Time(newValue: TimerPreset) {
+    this.timer2.stop();
+    this.timer2.setFromPreset(newValue);
+  }
+
   private restoreTimerPreset() {
     this.timer1.setFromPreset(this._timerPreset);
     this.timer2.setFromPreset(this._timerPreset);

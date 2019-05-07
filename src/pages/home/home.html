@@ -4,6 +4,9 @@
       Dual Attack
     </ion-title>
     <ion-buttons end>
+        <button ion-button icon-only (click)="showEditClock()">
+            <ion-icon name="create"></ion-icon>
+          </button>
       <button ion-button icon-only (click)="showServerSettings()" *ngIf="serverSettingsAvailable">
         <ion-icon name="wifi"></ion-icon>
       </button>

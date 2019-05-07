@@ -6,6 +6,7 @@ import { WebServerPlugin, WebServerRequest } from '../../native/webserver';
 
 import { GameStateProvider } from '../../providers/game-state/game-state';
 import { SettingsPage } from '../settings/settings';
+import { EditClockPage } from '../edit-clock/edit-clock';
 const { Modals, WebServerPlugin } = Plugins;
 
 @Component({
@@ -76,6 +77,13 @@ export class HomePage {
   showSettings() {
     let profileModal = this.modalCtrl.create(SettingsPage);
     profileModal.present();
+  }
+
+  showEditClock() {
+    this.gameState.togglePause(true);
+    
+    let editModal = this.modalCtrl.create(EditClockPage);
+    editModal.present();
   }
 
   async reset() {

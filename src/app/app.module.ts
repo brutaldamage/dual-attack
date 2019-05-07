@@ -9,13 +9,15 @@ import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
 import { GameStateProvider } from '../providers/game-state/game-state';
 import { WebserverProvider } from '../providers/webserver/webserver';
+import { EditClockPage } from '../pages/edit-clock/edit-clock';
 
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    SettingsPage
+    SettingsPage,
+    EditClockPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { WebserverProvider } from '../providers/webserver/webserver';
   entryComponents: [
     MyApp,
     HomePage,
-    SettingsPage
+    SettingsPage,
+    EditClockPage
   ],
   providers: [
     StatusBar,

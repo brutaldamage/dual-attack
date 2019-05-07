@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewController, Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GameStateProvider } from '../../providers/game-state/game-state';
 import { TimerPreset } from '../../_logic/TimerPreset';
@@ -25,7 +26,7 @@ export class EditClockPage {
   playerTwoMinutes: number;
   playerTwoSeconds: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private gameState: GameStateProvider, ) {
+  constructor(public viewCtrl: ViewController, public navParams: NavParams, private gameState: GameStateProvider, ) {
 
     var millisec = this.gameState.timer1.time;
 
@@ -47,6 +48,10 @@ export class EditClockPage {
     this.playerTwoSeconds = seconds;
   }
 
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
+
   save() {
     var player1TotalMinutes =  parseInt(this.playerOneMinutes.toString());
     if(parseInt(this.playerOneHours.toString()) > 0)
@@ -65,6 +70,6 @@ export class EditClockPage {
       seconds: this.playerTwoSeconds
     }));
 
-    this.navCtrl.pop();
+    this.viewCtrl.dismiss();
   }
 }

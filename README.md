@@ -7,6 +7,11 @@ Dual Attack is a web and mobile application built with [Ionic Capactior](https:/
 | Mobile      | [![Build status](https://dev.azure.com/brutaldamage/Dual%20Attack/_apis/build/status/Dual%20Attack%20Mobile)](https://dev.azure.com/brutaldamage/Dual%20Attack/_build/latest?definitionId=2)|
 | Web   | [![Netlify Status](https://api.netlify.com/api/v1/badges/91ca6702-96d5-40c5-9d15-dcfbe91e4a6d/deploy-status)](https://app.netlify.com/sites/competent-brahmagupta-3e733d/deploys)       |
 
+### Important Notes
+Right now we're having issues with the iOS build. Something related to provisioning profiles and capacitor. As a result, we've stopped releasing updates for iOS until we can figure out why signing isn't working.
+
+Everybody loves Apple provisioning profiles right!?!?
+
 ## Start Playing
 * [Google Play: Android](https://play.google.com/store/apps/details?id=blog.brutaldamage.dualattack)
 * [App Store: iOS](https://itunes.apple.com/us/app/dual-attack/id1449425043?ls=1&mt=8)

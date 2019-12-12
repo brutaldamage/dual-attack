@@ -15,5 +15,5 @@ target 'App' do
   pod 'GCDWebServer', "~> 3.0"
   
   # Use the following line to use App Center Analytics and Crashes.
-  pod 'AppCenter'
+  pod 'AppCenter', '~> 2.5'
 end

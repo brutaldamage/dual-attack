@@ -1,6 +1,6 @@
 {
   "name": "dual-attack",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "author": "Brutal Damage",
   "homepage": "https://brutaldamage.github.io/dual-attack/",
   "private": true,
@@ -36,5 +36,5 @@
     "@ionic/app-scripts": "^3.2.4",
     "typescript": "^3.7.3"
   },
-  "description": "An application for Warmahores for tracking time, turn and control points during a game."
+  "description": "An application for Warmahordes for tracking time, turn and control points during a game."
 }

@@ -15,7 +15,7 @@ Everybody loves Apple provisioning profiles right!?!?
 ## Start Playing
 * [Google Play: Android](https://play.google.com/store/apps/details?id=blog.brutaldamage.dualattack)
 * [App Store: iOS](https://itunes.apple.com/us/app/dual-attack/id1449425043?ls=1&mt=8)
-* [Web: dual-attack.app](https://dual-attack.app)
+* [Web: dual-attack](https://dual-attack.drewfrisk.dev)
 
 ## What Is It?
 We ([Brutal Damage](https://brutaldamage.blog)) wanted a way to display live updates of clock, turn, and CP info for our Warmachine & Hordes Youtube streams. We had trouble finding something that did what we wanted, so we decided to build what we couldn't find.
@@ -34,7 +34,7 @@ If you run the Android or iOS app, when it starts, the app will create an intera
 If you launch that url in a web browser you'll get a web page that displays the game stats from the mobile app in realtime. How cool is that!?! This allows the game stats to easily be displayed on an external device, such as a TV or monitor. For us, we open the url in [OBS](https://obsproject.com/) and put some custom CSS over the top of it so it can be displayed on our streams and recordings. See the customizing section below for info on modifying the default output.
 
 #### Web App
-We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.app](https://dual-attack.app).
+We weren't originally going to publish this as a web application, but capacitor makes it really easy. So, we made some adjustments to disable all the web server code and made the main part of the app available as a static site. Check it out at [https://dual-attack.drewfrisk.dev](https://dual-attack.drewfrisk.dev).
 
 ## Customizing
 We use dual attack with OBS by overlaying the web page served from the web server on the camera feed. But, since OBS is really flexible, you can adjust as necessary. The web server has 2 endpoints available, one to return the game state via a JSON response, and one to return the simple web pages. Those urls are as follows:
